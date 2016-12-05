@@ -11,7 +11,15 @@ def root():
     data = json.loads( response )
     return render_template("index.html", pic = data['url'] )
 
+@app.route("/testing")
+def test():
+    u = urllib2.urlopen("http://api.ft.com/site/v1/pages?apiKey=rdf6mjwhqtnz7a5wvm45t3cs")
+    response = u.read()
+    data = json.loads( response )
+    return render_template("test.html", info = data )
+
 
 if __name__ == "__main__":
     app.debug = True
     app.run()
+    
