@@ -1,0 +1,3 @@
+DECEMBER 5
+
+Bayle - added database login/register things, added initialize database
