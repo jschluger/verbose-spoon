@@ -3,12 +3,12 @@ import hashlib
 
 DATABASE = "data.db"
 
-def add_user(username, password, bday):
+def add_user(username, password):
     db = sqlite3.connect(DATABASE)
     c = db.cursor()
 
-    query = "INSERT INTO users VALUES (NULL, ?, ?, ?, ?, ?)"
-    c.execute(query, (username, hashlib.sha1(password).hexdigest(), bday, '', '',))
+    query = "INSERT INTO users VALUES (NULL, ?, ?, ?, ?)"
+    c.execute(query, (username, hashlib.sha1(password).hexdigest(), '', '',))
 
     db.commit()
     db.close()
