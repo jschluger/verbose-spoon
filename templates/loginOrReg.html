@@ -12,7 +12,7 @@
     <div class="span12">
       <div class="span6">
         <div class="area">
-          <form class="form-horizontal">
+          <form class="form-horizontal" method="POST" action="{{ url_for('authOrCreate') }}">
             <div class="heading">
               <h4 class="form-heading">Sign In</h4>
             </div>
@@ -24,7 +24,7 @@
 
               <div class="controls">
                 <input id="inputUsername" placeholder=
-                       "E.g. ashwinhegde" type="text">
+                       "E.g. ashwinhegde" type="text" name="username">
               </div>
             </div>
 
@@ -34,7 +34,7 @@
 
               <div class="controls">
                 <input id="inputPassword" placeholder=
-                       "Min. 8 Characters" type="password">
+                       "Min. 8 Characters" type="password" name="password">
               </div>
             </div>
 
@@ -42,7 +42,7 @@
               <div class="controls">
 		<br>                    
 		<button class="btn btn-success" type=
-                        "submit">Sign In</button> 
+                        "submit" name="logOrReg" value="login">Sign In</button> 
               </div>
             </div>
 
@@ -52,7 +52,7 @@
       <br><br>
       <div class="span6">
         <div class="area">
-          <form class="form-horizontal">
+          <form class="form-horizontal" method="POST" action="{{ url_for('authOrCreate') }}">
             <div class="heading">
               <h4 class="form-heading">Sign Up</h4>
             </div>
@@ -60,60 +60,39 @@
             <div class="control-group">
 
 
-            <div class="control-group">
-              <label class="control-label" for="inputFirst">First
-                Name</label>
-
-              <div class="controls">
-                <input id="inputFirst" placeholder=
-                       "E.g. Ashwin" type="text">
-              </div>
-            </div>
-
-            <div class="control-group">
-              <label class="control-label" for="inputLast">Last
-                Name</label>
-
-              <div class="controls">
-                <input id="inputLast" placeholder="E.g. Hegde"
-                       type="text">
+              <div class="control-group">
+		<label class="control-label" for=
+                       "inputEmail">Username</label>
+		
+		<div class="controls">
+                  <input id="inputEmail" placeholder=
+                       "E.g. ashwinh@cybage.com" type="text" name="username">
               </div>
             </div>
 
             <div class="control-group">
               <label class="control-label" for=
-                     "inputEmail">Email</label>
-
-              <div class="controls">
-                <input id="inputEmail" placeholder=
-                       "E.g. ashwinh@cybage.com" type="text">
-              </div>
-            </div>
-
-            <div class="control-group">
-              <label class="control-label" for=
-                     "inputUser">Username</label>
+                     "inputUser">Password</label>
 
               <div class="controls">
                 <input id="inputUser" placeholder=
-                       "E.g. ashwinhegde" type="text">
+                       "E.g. ashwinhegde" type="password" name="password">
               </div>
             </div>
 
             <div class="control-group">
               <label class="control-label" for=
-                     "inputPassword">Password</label>
+                     "inputPassword">Confirm Password</label>
 
               <div class="controls">
                 <input id="inputPassword" placeholder=
-                       "Min. 8 Characters" type="password">
+                       "Min. 8 Characters" type="password" name="pwd">
               </div>
             </div>
 
             <div class="control-group">
               <div class="controls">
- <button class=
-						 "btn btn-success" type="submit">Sign
+ <button class="btn btn-success" type="submit" value="register" name="logOrReg">Sign
                   Up</button> 
               </div>
             </div>

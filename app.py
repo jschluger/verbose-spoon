@@ -6,9 +6,9 @@ from  utils import accountManager, dbManager
 import urllib2, json
 
 app = Flask(__name__)
-#f = open( "utils/key", 'r' )
-#app.secret_key = f.read();
-#f.close
+f = open( "utils/key", 'r' )
+app.secret_key = f.read();
+f.close
 
 #root, two behaviors:
 #    if logged in: redirects you to your feed
@@ -18,12 +18,13 @@ def loginOrRegister():
     if 'username' in session:
         return redirect("/feed")
     else:
-        return render_template("loginOrReg.html")
+        return render_template("loginOrReg.html", username=True)
 
 #handles input of the login register page
 @app.route("/authOrCreate", methods=["POST"])
 def authOrCreate():
     formDict = request.form
+    print formDict
     if formDict["logOrReg"] == "login":
         username = formDict["username"]
         password = formDict["password"]
