@@ -15,7 +15,7 @@ f.close
 @app.route("/")
 def loginOrRegister():
     if 'username' in session:
-        return redirect("/feed")
+        ##return redirect("/feed")
     else:
         return render_template("loginOrReg.html")
 
@@ -64,7 +64,8 @@ def logout():
         return render_template("loginOrReg.html",status="logged out") 
     else:
         return redirect(url_for('loginOrRegister'))
-@app.route("/")
+
+@app.route("/testerino")
 def root():
     u = urllib2.urlopen("https://api.nasa.gov/planetary/apod?api_key=z5OCLcXbxVpm5pJfALskk1aCWeBKRsNiFv8N1YYp")
     response = u.read()
