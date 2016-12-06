@@ -1,13 +1,69 @@
 from flask import Flask, render_template, request, session, redirect, url_for
-import urllib2, json
+import hashlib
+import os
+import utils
+from  utils import accountManager, dbManager
 
 app = Flask(__name__)
+f = open( "utils/key", 'r' )
+app.secret_key = f.read();
+f.close
 
+#root, two behaviors:
+#    if logged in: redirects you to your feed
+#    if not logged in: displays log in/register page
+@app.route("/")
+def loginOrRegister():
+    if 'username' in session:
+        return redirect("/feed")
+    else:
+        return render_template("loginOrReg.html")
 
-def validate_form(form, required_keys):
-    """ Check if a dictionary contains all the required keys """
-    return set(required_keys) <= set(form)
+#handles input of the login register page
+@app.route("/authOrCreate", methods=["POST"])
+def authOrCreate():
+    formDict = request.form
+    if formDict["logOrReg"] == "login":
+        username = formDict["username"]
+        password = formDict["password"]
+        loginStatus = "login failed"
+        statusNum = accountManager.authenticate(username,password) #returns 0,1 or 2 for login status messate
+        if statusNum == 0:
+            loginStatus = "user does not exist"
+        elif statusNum == 1:
+            session["username"]=username
+            loginStatus = username + " logged in"
+            return redirect( "/feed" )
+        elif statusNum == 2:
+            loginStatus = "wrong password"
 
+        return render_template("loginOrReg.html",status=loginStatus)
+
+    elif formDict["logOrReg"] == "register":  #registering
+        username = formDict["username"]
+        password = formDict["password"]
+        pwd = formDict["pwd"]  #confirm password
+        registerStatus = "register failed"
+        statusNum = accountManager.register(username,password,pwd) #returns true or false
+        if statusNum == 0:
+            registerStatus = "username taken"
+        elif statusNum == 1:
+            registerStatus = "passwords do not match"
+        elif statusNum == 2:
+            registerStatus = username +" account created"
+
+        return render_template("loginOrReg.html",status=registerStatus) #status is the login/creation messate 
+    else:
+        return redirect(url_for("loginOrReg"))
+
+#logout of user
+@app.route('/logout', methods=["POST", "GET"])
+def logout():
+    if "username" in session:
+        session.pop('username')
+        return render_template("loginOrReg.html",status="logged out") 
+    else:
+        return redirect(url_for('loginOrRegister'))
 @app.route("/")
 def root():
     u = urllib2.urlopen("https://api.nasa.gov/planetary/apod?api_key=z5OCLcXbxVpm5pJfALskk1aCWeBKRsNiFv8N1YYp")
@@ -21,63 +77,6 @@ def test():
     response = u.read()
     data = json.loads( response )
     return render_template("test.html", info = data )
-
-@app.route("/register", methods=["POST", "GET"])
-def register():
-    if request.method == "POST":
-        # User has submitted a request to register an account
-        required_keys = ["username", "pass", "passconfirm", "bday"]
-        if not validate_form(request.form, required_keys):
-            return render_template("register.html", message="Malformed request.", category="danger")
-
-        username = request.form["username"]
-        password = request.form["pass"]
-        password_confirm = request.form["passconfirm"]
-        bday = request.form["bday"]
-
-        if not username.isalnum():
-            return render_template("register.html", message="Usernames must contain only alphanumeric characters.", category="danger")
-
-        if password != password_confirm:
-            return render_template("register.html", message="Passwords do not match.", category="danger")
-
-        if len(password) < 6:
-            return render_template("register.html", message="Password must be at least 6 characters in length.", category="danger")
-
-        if password == password.lower():
-            return render_template("register.html", message="Password must contain at least one capitalized letter.", category="danger")
-
-        if user.get_user(username=username):
-            return render_template("register.html", message="Username is already in use.", category="danger")
-
-        user.add_user(username, password)
-
-        return render_template("register.html", message="Account created!", category="success")
-    return render_template("register.html")
-
-@app.route("/login", methods=["GET", "POST"])
-def login():
-    if request.method == "POST":
-        # User has submitted a request to login
-        required_keys = ["username", "pass"]
-        if not validate_form(request.form, required_keys):
-            return render_template("login.html", message="Malformed request.", category="danger")
-
-        username = request.form["username"]
-        password = hashlib.sha1(request.form["pass"]).hexdigest()
-
-        result = user.get_user(username=username)
-        if result:
-            if result[2] == password:
-                session["username"] = username
-                return redirect(url_for("profile"))
-            return render_template("login.html", message="Invalid password", category="danger")
-        return render_template("login.html", message="Username does not exist...", add_mess="Register a new account?", category="danger")
-    return render_template("login.html")
-
-def logout():
-    session.clear()
-    return redirect(url_for("root"))
 
 if __name__ == "__main__":
     app.debug = True
