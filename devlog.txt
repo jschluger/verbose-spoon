@@ -15,7 +15,7 @@ jackS -- 2016-12-16 20:16
 -added formating to devlog
 
 jordanY -- 2016-12-16 21:50
-- added register, login, and logout methods in flask app
+- added bootstrap, created base html page (navbar), created sample login page to test base html page
 
 
 
