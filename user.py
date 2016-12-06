@@ -39,7 +39,7 @@ def get_stories(uid):
 
     query = "SELECT DISTINCT stories.storyid,stories.title from updates,stories WHERE userid = ? AND updates.storyid = stories.storyid"
     c.execute(query, (uid,))
-
+    
     result = c.fetchall()
     db.close()
     return result if result else []
