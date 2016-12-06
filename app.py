@@ -75,6 +75,9 @@ def login():
         return render_template("login.html", message="Username does not exist...", add_mess="Register a new account?", category="danger")
     return render_template("login.html")
 
+def logout():
+    session.clear()
+    return redirect(url_for("root"))
 
 if __name__ == "__main__":
     app.debug = True
