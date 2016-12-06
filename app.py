@@ -18,6 +18,59 @@ def test():
     data = json.loads( response )
     return render_template("test.html", info = data )
 
+@app.route("/register", methods=["POST", "GET"])
+def register():
+    if request.method == "POST":
+        # User has submitted a request to register an account
+        required_keys = ["username", "pass", "passconfirm", "bday"]
+        if not validate_form(request.form, required_keys):
+            return render_template("register.html", message="Malformed request.", category="danger")
+
+        username = request.form["username"]
+        password = request.form["pass"]
+        password_confirm = request.form["passconfirm"]
+        bday = request.form["bday"]
+
+        if not username.isalnum():
+            return render_template("register.html", message="Usernames must contain only alphanumeric characters.", category="danger")
+
+        if password != password_confirm:
+            return render_template("register.html", message="Passwords do not match.", category="danger")
+
+        if len(password) < 6:
+            return render_template("register.html", message="Password must be at least 6 characters in length.", category="danger")
+
+        if password == password.lower():
+            return render_template("register.html", message="Password must contain at least one capitalized letter.", category="danger")
+
+        if user.get_user(username=username):
+            return render_template("register.html", message="Username is already in use.", category="danger")
+
+        user.add_user(username, password)
+
+        return render_template("register.html", message="Account created!", category="success")
+    return render_template("register.html")
+
+@app.route("/login", methods=["GET", "POST"])
+def login():
+    if request.method == "POST":
+        # User has submitted a request to login
+        required_keys = ["username", "pass"]
+        if not validate_form(request.form, required_keys):
+            return render_template("login.html", message="Malformed request.", category="danger")
+
+        username = request.form["username"]
+        password = hashlib.sha1(request.form["pass"]).hexdigest()
+
+        result = user.get_user(username=username)
+        if result:
+            if result[2] == password:
+                session["username"] = username
+                return redirect(url_for("profile"))
+            return render_template("login.html", message="Invalid password", category="danger")
+        return render_template("login.html", message="Username does not exist...", add_mess="Register a new account?", category="danger")
+    return render_template("login.html")
+
 
 if __name__ == "__main__":
     app.debug = True
