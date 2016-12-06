@@ -5,9 +5,9 @@ import utils
 from  utils import accountManager, dbManager
 
 app = Flask(__name__)
-f = open( "utils/key", 'r' )
-app.secret_key = f.read();
-f.close
+#f = open( "utils/key", 'r' )
+#app.secret_key = f.read();
+#f.close
 
 #root, two behaviors:
 #    if logged in: redirects you to your feed
@@ -15,7 +15,7 @@ f.close
 @app.route("/")
 def loginOrRegister():
     if 'username' in session:
-        ##return redirect("/feed")
+        return redirect("/feed")
     else:
         return render_template("loginOrReg.html")
 
@@ -78,6 +78,10 @@ def test():
     response = u.read()
     data = json.loads( response )
     return render_template("test.html", info = data )
+
+@app.route("/feed")
+def feed():
+    return "Works"
 
 if __name__ == "__main__":
     app.debug = True
