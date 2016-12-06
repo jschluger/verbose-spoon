@@ -7,10 +7,10 @@ From the assignment page:
   -e.g.: topherM -- 1999-12-31 23:59
 
 ================ MONDAY, DECEMBER 5th ================ 
-BayleS -- 2016-12-16 14:00
+bayleS -- 2016-12-16 14:00
 added database login/register things, added initialize database
 
-JackS -- 2016-12-16 20:16
+jackS -- 2016-12-16 20:16
 -updated design doc to reflect changes suggested during class by other teams
 -added formating to devlog
 
