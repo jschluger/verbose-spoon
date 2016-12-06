@@ -1,23 +1,128 @@
-{% extends "base.html" %}
+{% extends "basee.html" %}
 
 {% block head %}
 <title>Login</title>
+<!--<link type="text/css" rel="stylesheet" href="/static/css/bootsnipp.css">-->
 {% endblock %}
 
 {% block body %}
-<h1>Log in here</h1>
-<form method="POST" action="/login">
-    <div class="row">
-        <div class="col-md-6">
-            <p>Username: <input class="form-control" type="text" name="username" placeholder="Username" required></p>
+<br><br><br>
+<div class="container">
+  <div class="row-fluid">
+    <div class="span12">
+      <div class="span6">
+        <div class="area">
+          <form class="form-horizontal">
+            <div class="heading">
+              <h4 class="form-heading">Sign In</h4>
+            </div>
+
+            
+            <div class="control-group">
+              <label class="control-label" for=
+                     "inputUsername">Username</label>
+
+              <div class="controls">
+                <input id="inputUsername" placeholder=
+                       "E.g. ashwinhegde" type="text">
+              </div>
+            </div>
+
+            <div class="control-group">
+              <label class="control-label" for=
+                     "inputPassword">Password</label>
+
+              <div class="controls">
+                <input id="inputPassword" placeholder=
+                       "Min. 8 Characters" type="password">
+              </div>
+            </div>
+
+            <div class="control-group">
+              <div class="controls">
+		<br>                    
+		<button class="btn btn-success" type=
+                        "submit">Sign In</button> 
+              </div>
+            </div>
+
+          </form>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-md-6">
-            <p>Password: <input class="form-control" type="password" name="pass" placeholder="Password" required></p>
+      </div>
+      <br><br>
+      <div class="span6">
+        <div class="area">
+          <form class="form-horizontal">
+            <div class="heading">
+              <h4 class="form-heading">Sign Up</h4>
+            </div>
+
+            <div class="control-group">
+
+
+            <div class="control-group">
+              <label class="control-label" for="inputFirst">First
+                Name</label>
+
+              <div class="controls">
+                <input id="inputFirst" placeholder=
+                       "E.g. Ashwin" type="text">
+              </div>
+            </div>
+
+            <div class="control-group">
+              <label class="control-label" for="inputLast">Last
+                Name</label>
+
+              <div class="controls">
+                <input id="inputLast" placeholder="E.g. Hegde"
+                       type="text">
+              </div>
+            </div>
+
+            <div class="control-group">
+              <label class="control-label" for=
+                     "inputEmail">Email</label>
+
+              <div class="controls">
+                <input id="inputEmail" placeholder=
+                       "E.g. ashwinh@cybage.com" type="text">
+              </div>
+            </div>
+
+            <div class="control-group">
+              <label class="control-label" for=
+                     "inputUser">Username</label>
+
+              <div class="controls">
+                <input id="inputUser" placeholder=
+                       "E.g. ashwinhegde" type="text">
+              </div>
+            </div>
+
+            <div class="control-group">
+              <label class="control-label" for=
+                     "inputPassword">Password</label>
+
+              <div class="controls">
+                <input id="inputPassword" placeholder=
+                       "Min. 8 Characters" type="password">
+              </div>
+            </div>
+
+            <div class="control-group">
+              <div class="controls">
+ <button class=
+						 "btn btn-success" type="submit">Sign
+                  Up</button> 
+              </div>
+            </div>
+
+          </form>
         </div>
+      </div>
     </div>
-    <br>
-<input class="btn btn-primary" type="submit" value="Login">
-</form>
+  </div>
+</div>
+
 {% endblock %}

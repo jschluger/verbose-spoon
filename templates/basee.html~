@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link type="text/css" rel="stylesheet" href="/static/css/bootstrap.css">
+        {% block head %}
+        {% endblock %}
+    </head>
+
+
+
+<nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container">
+    
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">Verbose Stock Exchange</a>
+    </div>
+
+
+<form class="navbar-form navbar-right" role="search">
+  <div class="form-group">
+    <input type="text" class="form-control" placeholder="Ticker Symbol">
+  </div>
+  <button type="submit" class="btn btn-default">Search</button>
+</form>
+
+
+<button type="button" class="btn btn-default navbar-btn navbar-right">Feed</button>
+<p class="navbar-text navbar-right">     </p>
+<button type="button" class="btn btn-default navbar-btn navbar-right">Portfolio</button>
+<p class="navbar-text navbar-right">     </p>
+<button type="button" class="btn btn-default navbar-btn navbar-right">Profile</button>
+
+
+
+  </div>
+</nav>
+
+
+
+
+
+
+
+
+
+            {% block body %}
+            {% endblock %}
+	<script src="/static/js/bootstrap.js"></script>
+    </body>
+</html>

@@ -1,26 +1,26 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <link type="text/css" rel="stylesheet" href="/static/css/bootstrap.min.css">
+        <link type="text/css" rel="stylesheet" href="/static/css/bootstrap.css">
         {% block head %}
         {% endblock %}
     </head>
 
-    <nav class="navbar navbar-default">
+    <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
                 <a class="navbar-brand" href="/">Verbose Stock Exchange</a>
             </div>
             <div id="main-navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navbar-right">
-                  {% if username %}
+                  <!--{% if username %}-->
 		  <li><a href="/feed"> Feed </a></li>
 		  <li><a href="/stock"> Stocks </a></li>
                   <li><a href="/profile"> My Profile </a></li>
                   <li><a href="/logout">Logout</a></li>
-                  {% else %}
+                  <!--{% else %}-->
 		  <li><a href="/"> Login/Register</a></li>
-                  {% endif %}
+                  <!--{% endif %}-->
                 </ul>
             </div>
         </div>
@@ -28,7 +28,7 @@
 
     <body>
         <div class="container">
-            {% if message %}
+            <!--{% if message %}-->
             <div class="row">
                 <div class="col-md-6">
                     <div class="alert alert-{{category}}">
@@ -37,9 +37,10 @@
                     </div>
                 </div>
             </div>
-            {% endif %}
+            <!--{% endif %}-->
             {% block body %}
             {% endblock %}
         </div>
+	<script src="/static/js/bootstrap.js"></script>
     </body>
 </html>

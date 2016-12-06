@@ -3,6 +3,7 @@ import hashlib
 import os
 import utils
 from  utils import accountManager, dbManager
+import urllib2, json
 
 app = Flask(__name__)
 #f = open( "utils/key", 'r' )
@@ -86,4 +87,3 @@ def feed():
 if __name__ == "__main__":
     app.debug = True
     app.run()
-    
