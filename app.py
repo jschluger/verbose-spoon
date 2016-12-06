@@ -4,6 +4,10 @@ import urllib2, json
 app = Flask(__name__)
 
 
+def validate_form(form, required_keys):
+    """ Check if a dictionary contains all the required keys """
+    return set(required_keys) <= set(form)
+
 @app.route("/")
 def root():
     u = urllib2.urlopen("https://api.nasa.gov/planetary/apod?api_key=z5OCLcXbxVpm5pJfALskk1aCWeBKRsNiFv8N1YYp")
