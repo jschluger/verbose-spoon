@@ -18,7 +18,7 @@ c = db.cursor()    #facilitate db ops
 q = "CREATE TABLE users (username TEXT, password TEXT, userId INTEGER, funds FLOAT)"
 c.execute(q)
 
-q="CREATE TABLE stocks (userName TEXT, stockName TEXT, shares INTEGER)"
+q="CREATE TABLE stocks (username TEXT, stockName TEXT, shares INTEGER)"
 c.execute(q)
 
 db.commit()
