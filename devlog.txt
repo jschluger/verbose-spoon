@@ -20,8 +20,14 @@ jordanY -- 2016-12-05 21:50
 
 
 ================ TUESDAY, DECEMBER 6th ================
+jessicaT -- 2016-12-06 06:00
+-made sign in/up page, made navbar look better
+
 bayleS -- 2016-12-06 14:00
 added database functionalities for buy and sell stock
+
+jessicaT -- 2016-12-06 14:00
+-made sign in/up page work with the functions
 
 bayleS -- 2016-12-06 21:00
 added dob, full name, and fav stock properties for users
