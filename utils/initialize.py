@@ -15,7 +15,7 @@ db = sqlite3.connect(f) #open if f exists, otherwise create
 c = db.cursor()    #facilitate db ops
 
 #------------------------create tables---------------------------------------
-q = "CREATE TABLE users (username TEXT, password TEXT, userId INTEGER, funds FLOAT)"
+q = "CREATE TABLE users (username TEXT, password TEXT, userId INTEGER, funds FLOAT, fullName TEXT, dob INTEGER, favStock TEXT)"
 c.execute(q)
 
 q="CREATE TABLE stocks (username TEXT, stockName TEXT, shares INTEGER)"
