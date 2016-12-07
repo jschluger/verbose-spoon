@@ -32,6 +32,21 @@ def get_quote_dict(symbol):
 
     return data
 
+def get_chart(symbol, normalized = "false", number_of_days = 365, data_period = 'Day', type = 'price'):
+    data = {}
+    data['Normalized'] = normalized
+    data['NumberOfDays'] = number_of_days
+    data['DataPeriod'] = data_period
+    to_graph = {}
+    to_graph['Symbol'] = symbol
+    to_graph['Type'] = "price"
+    to_graph['Params'] = ['c']
+    data['Elements'] = to_graph
+
+    json_data = json.dumps(data)
+
+    return json_data
+
 def lookup(search_term):
     if search_term == '':
         return 'No empty string search terms'

@@ -36,3 +36,6 @@ added dob, full name, and fav stock properties for users
 
 roddaJ -- 2016-12-07 13:37
 Since Monday -- implemented getting stock prices from api (in api.py) as well as a lookup feature to get a list of stocks by search string.  You can also get a lot more than stock prices, as api.py can also return a dict with a lot of interesting stock related information
+
+roddaJ -- 2016-12-07 14:03
+Started working on generating correctly formatted request to get chart data from api
