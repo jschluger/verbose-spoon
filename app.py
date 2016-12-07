@@ -85,22 +85,11 @@ def test():
 def feed():
     return "Works"
 
-@app.route("/profile/")
-@app.route("/profile/<username>")
-def profile(username=None):
-    if "username" not in session:
-        return redirect(url_for("login"))
+@app.route("/stock/<stocksymbol>")
+def stock(stocksymbol=None):
+    return stocksymbol
 
-    if not username:
-        username = session["username"]
-    me = username == session["username"]
     
-    # Invalid user
-    abort(404)
-
-@app.route("/stock")
-def stock():
-    return "Stocks"
 
 if __name__ == "__main__":
     app.debug = True
