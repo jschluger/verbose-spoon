@@ -85,6 +85,12 @@ def test():
 def feed():
     return "Works"
 
+@app.route("/stock/<stocksymbol>")
+def stock(stocksymbol=None):
+    return stocksymbol
+
+    
+
 if __name__ == "__main__":
     app.debug = True
     app.run()

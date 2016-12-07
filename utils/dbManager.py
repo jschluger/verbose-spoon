@@ -42,6 +42,23 @@ def sellStock(stockName, shares, price, username):
                                                               )
     c.execute(p) 
     p = 'SELECT shares FROM stocks WHERE username == "%s" AND stockName = "%s"'%(username, stockName)
+<<<<<<< HEAD
+=======
+    c.execute(p)
+    newShares = c.fetchone()[0] - shares
+    p = 'UPDATE stocks SET shares = %d WHERE username == "%s"'%(newShares, username)
+    c.execute(p)
+
+    db.commit()
+    db.close()
+
+def updateFullName(username, name):
+    f = "database.db"
+    db = sqlite3.connect(f) #open if f exists, otherwise create
+    c = db.cursor()    #facilitate db ops
+
+    p = 'SELECT EXISTS(SELECT fullName FROM users WHERE username = "%s" LIMIT 1)'%(username)
+>>>>>>> 66492102fbbe00b3ed530cb52f0befe088349ae7
     c.execute(p)
     newShares = c.fetchone()[0] - shares
     p = 'UPDATE stocks SET shares = %d WHERE username == "%s"'%(newShares, username)
