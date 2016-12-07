@@ -80,7 +80,7 @@ def register(user,password,pwd):    #user-username, password-password, pwd-retyp
             userId = 0
 
         passHash = sha1(password).hexdigest()#hash it
-        insertUser = 'INSERT INTO users VALUES ("%s","%s",%d, 100000);' % (user,passHash,userId) #sqlite code for inserting new user
+        insertUser = 'INSERT INTO users VALUES ("%s","%s",%d, 100000," ",0," ");' % (user,passHash,userId) #sqlite code for inserting new user
 
         c.execute(insertUser)
 
@@ -92,11 +92,83 @@ def register(user,password,pwd):    #user-username, password-password, pwd-retyp
     db.close()  #close database
     return messageNumber
 
-    #==========================================================
 
-'''testing purposes
-register("anya","password","password")
-register("software","password","password")
-'''
+def updateFullName(username, name):
+    f = "database.db"
+    db = sqlite3.connect(f) #open if f exists, otherwise create
+    c = db.cursor()    #facilitate db ops
 
+    p = 'SELECT EXISTS(SELECT fullName FROM users WHERE username = "%s" LIMIT 1)'%(username)
+    c.execute(p)
+    if (c.fetchone()[0] == 0):
+        oldName = "you had no previous name!"
+    else:
+        p = 'SELECT fullName FROM users WHERE username == "%s" '%(username)
+        c.execute(p)
+        oldName = c.fetchone()[0]
+
+    p = 'UPDATE stocks SET fullName = "%s" WHERE username == "%s"'%(name, username)
+    c.execute(p)
+
+    db.commit()
+    db.close()
+    return oldName
+
+def updateDob(username,birth):
+    f = "database.db"
+    db = sqlite3.connect(f) #open if f exists, otherwise create
+    c = db.cursor()    #facilitate db ops
     
+    p = 'SELECT EXISTS(SELECT dob FROM users WHERE username = "%s" LIMIT 1)'%(username)
+    c.execute(p)
+    if (c.fetchone()[0] == 0):
+        oldDob = "you had no previous birthdate!"
+    else:
+        p = 'SELECT dob FROM users WHERE username == "%s" '%(username)
+        c.execute(p)
+        oldDob = c.fetchone()[0]
+
+    p = 'UPDATE stocks SET dob = %d WHERE username == "%s"'%(birth, username)
+    c.execute(p)
+
+    db.commit()
+    db.close()
+    return oldDob
+
+def updateFav(username,stock):
+    f = "database.db"
+    db = sqlite3.connect(f) #open if f exists, otherwise create
+    c = db.cursor()    #facilitate db ops
+
+    p = 'SELECT EXISTS(SELECT favStock FROM users WHERE username = "%s" LIMIT 1)'%(username)
+    c.execute(p)
+    if (c.fetchone()[0] == 0):
+        oldFav = "you had no previous name!"
+    else:
+        p = 'SELECT favStock FROM users WHERE username == "%s" '%(username)
+        c.execute(p)
+        oldFav = c.fetchone()[0]
+
+    p = 'UPDATE stocks SET favStock = "%s" WHERE username == "%s"'%(stock, username)
+    c.execute(p)
+
+    db.commit()
+    db.close()
+    return oldFav
+
+def updatePwd(username,pwd):
+    f = "database.db"
+    db = sqlite3.connect(f) #open if f exists, otherwise create
+    c = db.cursor()    #facilitate db ops
+    
+    passHash = sha1(pwd).hexdigest()#hash it
+    p = 'UPDATE users SET password = "%s" WHERE username == "%s"'%(passHash, username)
+
+    c.execute(p)
+
+    db.commit()
+    db.close()
+    
+register('bayle','michal','michal')
+updatePwd('bayle','caleb')
+        
