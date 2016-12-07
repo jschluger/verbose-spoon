@@ -7,17 +7,23 @@ From the assignment page:
   -e.g.: topherM -- 1999-12-31 23:59
 
 ================ MONDAY, DECEMBER 5th ================ 
-bayleS -- 2016-12-16 14:00
+bayleS -- 2016-12-05 14:00
 added database login/register things, added initialize database
 
-jackS -- 2016-12-16 20:16
+jackS -- 2016-12-05 20:16
 -updated design doc to reflect changes suggested during class by other teams
 -added formating to devlog
 
-jordanY -- 2016-12-16 21:50
+jordanY -- 2016-12-05 21:50
 - added bootstrap, created base html page (navbar), created sample login page to test base html page
 
 
 
 ================ TUESDAY, DECEMBER 6th ================
+bayleS -- 2016-12-06 14:00
+added database functionalities for buy and sell stock
+
+bayleS -- 2016-12-06 21:00
+added dob, full name, and fav stock properties for users
+
 
