@@ -57,12 +57,11 @@ def sellStock(stockName, shares, price, username):
         newShares = c.fetchone()[0] - shares
         p = 'UPDATE stocks SET shares = %d WHERE username == "%s" AND stockName == "%s"'%(newShares, username, stockName)
         c.execute(p)
-        return "sold!"
-
+    else:
+        return "you do not have enough shares of this stock to make this transaction"        
     db.commit()
     db.close()
-    return "you do not have enough shares of this stock to make this transaction"
-
+    return "sold!"
     
 def enufMoney(username,shares,price):
     f = "database.db"
@@ -118,7 +117,7 @@ def get_owned_stocks(username, **kwargs):
 
 
 '''testing testing 1,2,3'''
-
-sellStock('abc', 20, 100, 'caleb')
+buyStock('abc',6,100,'caleb')
+sellStock('abc', 2, 100, 'caleb')
 '''sellStock('asdf', 80, 100000, 'caleb')'''
 
