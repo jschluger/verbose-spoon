@@ -1,4 +1,6 @@
 devlog!
+Team Verbose Spoon!
+Project: Stock Simulation
 
 From the assignment page:
  -Separate devlog entries with newlines
