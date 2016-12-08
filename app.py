@@ -15,7 +15,6 @@ f.close
 #    if not logged in: displays log in/register page
 @app.route("/")
 def loginOrRegister():
-    return render_template("stock.html")
     if 'username' in session:
         return redirect("/feed")
     else:
