@@ -62,4 +62,7 @@ jordanY -- 2016-12-08 01:20
 jessicaT -- 2016-12-08 05:30
 -made stock page
 
+roddaJ -- 2016-12-08 15:00
+- Added proper code to get data for chart from api
+
 ================ FRIDAY, DECEMBER 9th ================
