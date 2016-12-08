@@ -1,5 +1,5 @@
-import urllib2, json
-import dbManager
+import urllib2, json, urllib
+#import dbManager
 
 def get_json_response(url):
     u = urllib2.urlopen(url)
@@ -42,11 +42,17 @@ def get_chart(symbol, normalized = "false", number_of_days = 365, data_period = 
     to_graph['Symbol'] = symbol
     to_graph['Type'] = "price"
     to_graph['Params'] = ['c']
-    data['Elements'] = to_graph
+    data['Elements'] = [to_graph]
 
     json_data = json.dumps(data)
 
-    return json_data
+    print json_data
+
+    url = 'http://dev.markitondemand.com/Api/v2/InteractiveChart/json?parameters=' + urllib.pathname2url(json_data)
+    print url
+
+    response = get_json_response(url)
+    return response
 
 def lookup(search_term):
     if search_term == '':
@@ -59,16 +65,16 @@ def lookup(search_term):
 
     return data
 
-def get_stock_info(ticker, **kwargs):
-    info = get_quote_dict(ticker)
-    company_name = info['Name']
-    last_price = info['LastPrice']
-    timestamp = info['Timestamp']
-    resp = [ticker, company_name, last_price, timestamp]
-    if 'username' in kwargs:
-        stocks = dbManager.get_owned_stocks(ticker)
-        resp.extend(stocks)
-    return resp
+#def get_stock_info(ticker, **kwargs):
+#    info = get_quote_dict(ticker)
+#    company_name = info['Name']
+#    last_price = info['LastPrice']
+#    timestamp = info['Timestamp']
+#    resp = [ticker, company_name, last_price, timestamp]
+#    if 'username' in kwargs:
+#        stocks = dbManager.get_owned_stocks(ticker)
+#        resp.extend(stocks)
+#    return resp
     
     
     
