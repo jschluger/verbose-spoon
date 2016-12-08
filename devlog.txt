@@ -52,3 +52,7 @@ bayleS -- 2016-12-07 23:59
 made restrictions on buying stock (can't buy more than money you have). Annoying bug in not being able to sell more than you have
 
 ================ THURSDAY, DECEMBER 8th ================
+
+jordanY -- 2016-12-08 01:20
+- added method in dbManager.py for getting stocks owned.
+- added meethod in api.py to access stock info from api and database
