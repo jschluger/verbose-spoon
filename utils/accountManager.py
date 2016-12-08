@@ -107,7 +107,7 @@ def updateFullName(username, name):
         c.execute(p)
         oldName = c.fetchone()[0]
 
-    p = 'UPDATE stocks SET fullName = "%s" WHERE username == "%s"'%(name, username)
+    p = 'UPDATE users SET fullName = "%s" WHERE username == "%s"'%(name, username)
     c.execute(p)
 
     db.commit()
@@ -128,7 +128,7 @@ def updateDob(username,birth):
         c.execute(p)
         oldDob = c.fetchone()[0]
 
-    p = 'UPDATE stocks SET dob = %d WHERE username == "%s"'%(birth, username)
+    p = 'UPDATE users SET dob = %d WHERE username == "%s"'%(birth, username)
     c.execute(p)
 
     db.commit()
@@ -149,7 +149,7 @@ def updateFav(username,stock):
         c.execute(p)
         oldFav = c.fetchone()[0]
 
-    p = 'UPDATE stocks SET favStock = "%s" WHERE username == "%s"'%(stock, username)
+    p = 'UPDATE users SET favStock = "%s" WHERE username == "%s"'%(stock, username)
     c.execute(p)
 
     db.commit()
@@ -171,4 +171,6 @@ def updatePwd(username,pwd):
     
 register('bayle','michal','michal')
 updatePwd('bayle','caleb')
+register('caleb','michal','michal')
+
         
