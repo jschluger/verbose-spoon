@@ -7,6 +7,7 @@ From the assignment page:
   -e.g.: topherM -- 1999-12-31 23:59
 
 ================ MONDAY, DECEMBER 5th ================ 
+
 bayleS -- 2016-12-05 14:00
 added database login/register things, added initialize database
 
@@ -16,8 +17,6 @@ jackS -- 2016-12-05 20:16
 
 jordanY -- 2016-12-05 21:50
 - added bootstrap, created base html page (navbar), created sample login page to test base html page
-
-
 
 ================ TUESDAY, DECEMBER 6th ================
 jessicaT -- 2016-12-06 06:00
@@ -39,3 +38,5 @@ Since Monday -- implemented getting stock prices from api (in api.py) as well as
 
 roddaJ -- 2016-12-07 14:03
 Started working on generating correctly formatted request to get chart data from api
+
+================ THURSDAY, DECEMBER 8th ================
