@@ -57,12 +57,11 @@ def sellStock(stockName, shares, price, username):
         newShares = c.fetchone()[0] - shares
         p = 'UPDATE stocks SET shares = %d WHERE username == "%s" AND stockName == "%s"'%(newShares, username, stockName)
         c.execute(p)
-        return "sold!"
-
+    else:
+        return "you do not have enough shares of this stock to make this transaction"        
     db.commit()
     db.close()
-    return "you do not have enough shares of this stock to make this transaction"
-
+    return "sold!"
     
 def enufMoney(username,shares,price):
     f = "database.db"
@@ -101,8 +100,8 @@ def canYouEvenSell(username,stockName,shares):
     db.close()
 
 def get_owned_stocks(username, **kwargs):
-    f - database.db
-    db. sqlite3.connect(f)
+    f = "database.db"
+    db = sqlite3.connect(f)
     c = db.cursor()
     
     if 'symbol' in kwargs:
@@ -110,15 +109,11 @@ def get_owned_stocks(username, **kwargs):
         c.execute(query, (username, kwargs['symbol'],))
         result = c.fetchall()
         return result
-
+    
     query = "SELECT * FROM stocks WHERE username == ?"
     c.execute(query, (username,))
     result = c.fetchall()
     return result
 
 
-'''testing testing 1,2,3'''
-
-sellStock('abc', 20, 100, 'caleb')
-'''sellStock('asdf', 80, 100000, 'caleb')'''
 
