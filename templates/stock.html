@@ -8,7 +8,7 @@
 <br><br><br><br>
 <div class="page-header">
   <div class="col-md-1"></div>
-  <h1><span class="glyphicon glyphicon-piggy-bank" aria-hidden="true"></span>   {{info[1]}}      <small>{{info[0]}}</small></h1>
+  <h1><span class="glyphicon glyphicon-piggy-bank" aria-hidden="true"></span>   {{info[1]}}      <small>{{info[0].upper()}}</small></h1>
 </div>
 
 <div class="panel panel-default">
@@ -16,7 +16,7 @@
     <div class="col-md-1"></div>
     Shares owned: #SHARES <br>
     <div class="col-md-1"></div>
-    Price as of {{info[3]}} : {{info[2]}} <br>
+    Price as of {{info[3]}} : ${{info[2]}} <br>
     <div class="col-md-1"></div>
     Total value: INFO2*SHARES
   </div>
@@ -27,23 +27,32 @@
   <div class="row">
     <div class="col-md-4"></div>
     <div class="col-lg-2">
+<form method="POST" action="{{ url_for('buy') }}">
       <div class="input-group">
 	<span class="input-group-btn">
-          <button class="btn btn-default" type="button">BUY</button>
+          <button class="btn btn-default" type="submit">BUY</button>
 	</span>
-	<input type="text" class="form-control" placeholder="Number of shares">
+	<input type="text" class="form-control" placeholder="Number of shares" name="shares">
       </div><!-- /input-group -->
+<input type="hidden" name="stockName" value={{ info[0] }}>
+<input type="hidden" name="price" value={{ info[2] }}>
+</form>
     </div><!-- /.col-lg-6 -->
     <div class="col-lg-2">
+<form method="POST" action="{{ url_for('sell') }}">
       <div class="input-group">
 	<span class="input-group-btn">
-          <button class="btn btn-default" type="button">SELL</button>
+          <button class="btn btn-default" type="submit">SELL</button>
 	</span>
-	<input type="text" class="form-control" placeholder="Number of shares">
+	<input type="text" class="form-control" placeholder="Number of shares" name="shares">
       </div><!-- /input-group -->
+<input type="hidden" name="stockName" value={{ info[0] }}>
+<input type="hidden" name="price" value={{ info[2] }}>
+</form>
     </div><!-- /.col-lg-6 -->
   </div>
 </div>
+
 
 
 
