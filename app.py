@@ -90,8 +90,22 @@ def feed():
 def stock(stocksymbol=None):
     return render_template("stock.html", info=api.get_stock_info(stocksymbol))
 
-    
+@app.route("/buy")
+def buy():
+    if 'username' in session:
+        u = session["username"]
+        formDict = request.form
+        sn = formDict["stockName"]
+        s = int(formDict["shares"])
+        p = int(formDict["price"])
+        message = dbManager.buyStock(sn,s,p,u)
+        if (notice == "you don't got enuf money, dude"):
+            return redirect(url_for('stock'))
+            
+        return redirect(url_for('myStocks'))
+        
 
+    
 if __name__ == "__main__":
     app.debug = True
     app.run()
