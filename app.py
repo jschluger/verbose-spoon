@@ -2,7 +2,7 @@ from flask import Flask, render_template, request, session, redirect, url_for
 import hashlib
 import os
 import utils
-from  utils import accountManager, dbManager
+from  utils import accountManager, dbManager, api
 import urllib2, json
 
 app = Flask(__name__)
@@ -15,6 +15,7 @@ f.close
 #    if not logged in: displays log in/register page
 @app.route("/")
 def loginOrRegister():
+    return render_template("stock.html")
     if 'username' in session:
         return redirect("/feed")
     else:
@@ -85,9 +86,10 @@ def test():
 def feed():
     return "Works"
 
+    
 @app.route("/stock/<stocksymbol>")
 def stock(stocksymbol=None):
-    return stocksymbol
+    return render_template("stock.html", info=api.get_stock_info(stocksymbol))
 
     
 

@@ -56,3 +56,6 @@ made restrictions on buying stock (can't buy more than money you have). Annoying
 jordanY -- 2016-12-08 01:20
 - added method in dbManager.py for getting stocks owned.
 - added meethod in api.py to access stock info from api and database
+
+jessicaT -- 2016-12-08 05:30
+-made stock page
