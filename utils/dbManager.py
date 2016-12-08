@@ -100,8 +100,8 @@ def canYouEvenSell(username,stockName,shares):
     db.close()
 
 def get_owned_stocks(username, **kwargs):
-    f - database.db
-    db. sqlite3.connect(f)
+    f = "database.db"
+    db = sqlite3.connect(f)
     c = db.cursor()
     
     if 'symbol' in kwargs:
@@ -109,15 +109,11 @@ def get_owned_stocks(username, **kwargs):
         c.execute(query, (username, kwargs['symbol'],))
         result = c.fetchall()
         return result
-
+    
     query = "SELECT * FROM stocks WHERE username == ?"
     c.execute(query, (username,))
     result = c.fetchall()
     return result
 
 
-'''testing testing 1,2,3'''
-buyStock('abc',6,100,'caleb')
-sellStock('abc', 2, 100, 'caleb')
-'''sellStock('asdf', 80, 100000, 'caleb')'''
 
