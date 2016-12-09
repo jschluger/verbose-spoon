@@ -96,6 +96,8 @@ def myStocks():
         u = session["username"]
         #stuff = dbManager.get_own_stocks(u,something else)
         return render_template("my.html",info=info.get_user_info(u))
+    else:
+        return redirect(url_for('loginOrRegister'))
     
 @app.route("/buy")
 def buy():
