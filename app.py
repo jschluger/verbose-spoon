@@ -94,7 +94,6 @@ def stock(stocksymbol=None):
 def myStocks():
     if 'username' in session:
         u = session["username"]
-        #stuff = dbManager.get_own_stocks(u,something else)
         return render_template("my.html",info=info.get_user_info(u))
     
 @app.route("/buy")
@@ -124,7 +123,14 @@ def sell():
             return redirect(url_for('stock',note=message))
             
         return redirect(url_for('myStocks'))
-        
+
+@app.route("/results")
+def results():
+    if 'username' in session:
+        formDict = request.form
+        search = formDict["search"]
+        dictOfDicts = info.search_results(search)
+        return render_template("results.html",list = dictOfDicts)
 
     
 if __name__ == "__main__":

@@ -1,4 +1,5 @@
 import dbManager
+import api
 
 def get_stock_info(ticker, **kwargs):
     info = get_quote_dict(ticker)
@@ -27,3 +28,12 @@ def get_user_info(username):
 
     resp = [personal_info, pstocks_info]
     return resp
+
+def search_results(search):
+    dictOfDicts = api.lookup(search)
+    result = [][]
+    for i in range(len(dictOfDicts)):
+        result[i][0] = dictOfDicts[i]['Name']
+        result[i][1] = dictOfDicts[i]['Symbol']
+    return result
+        
