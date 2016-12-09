@@ -77,3 +77,6 @@ continued to link buy sell button to db
 jordanY -- 2016-12-9  2:27
 - moved stock info method from api.py to info.py
 - added new function to info.py that accesses user's personal info and info about stocks they own
+
+roddaJ -- 2016-12-09 14:04
+- Got ChartJS working in conjunction with pulling stock data from api.  Need to make it look visually appealing and playing around with some chart js options.
