@@ -13,4 +13,17 @@ def get_stock_info(ticker, **kwargs):
     return resp
 
 
+
+def get_user_info(username):
+    f = "database.db"
+    db = sqlite3.connect(f)
+    c = db.cursor()
+
+    query = "SELECT * FROM users WHERE username == ?"
+    c.execute(query, (username,))
+    personal_info = c.fetchone()
     
+    pstocks_info = dbManager.get_owned_stocks(username)
+
+    resp = [personal_info, pstocks_info]
+    return resp

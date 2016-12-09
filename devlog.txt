@@ -73,3 +73,7 @@ continued to link buy sell button to db
 
 
 ================ FRIDAY, DECEMBER 9th ================
+
+jordanY -- 2016-12-9  2:27
+- moved stock info method from api.py to info.py
+- added new function to info.py that accesses user's personal info and info about stocks they own
