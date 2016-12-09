@@ -88,11 +88,6 @@ def canYouEvenSell(username,stockName,shares):
         p = 'SELECT shares FROM stocks WHERE username == "%s" AND stockName == "%s"'%(username, stockName)
         c.execute(p)
         truth = (c.fetchone()[0] >= shares)
-        print"  it says it's "
-        if (truth):
-            print "true"
-        else:
-            print "false"
         return truth
     return False
 
@@ -115,5 +110,6 @@ def get_owned_stocks(username, **kwargs):
     result = c.fetchall()
     return result
 
-
+    db.commit()
+    db.close()
 

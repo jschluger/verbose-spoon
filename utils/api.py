@@ -1,10 +1,5 @@
-<<<<<<< HEAD
 import urllib2, json, urllib
 #import dbManager
-=======
-import urllib2, json
-
->>>>>>> a1579dbcd3ab9333895b2daedb87e5409aa3e745
 
 def get_json_response(url):
     u = urllib2.urlopen(url)
