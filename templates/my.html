@@ -1,0 +1,42 @@
+{% extends "basee.html" %}
+
+{% block head %}
+<title>My Stocks</title>
+{% endblock %}
+
+{% block body %}
+<br><br><br><br>
+
+
+{% for k in info[1] %}
+{% data = info.get_stock_info(k) %}
+
+
+<div class="page-header">
+  <div class="col-md-1"></div>
+  <h1><span class="glyphicon glyphicon-piggy-bank" aria-hidden="true"></span>   {{data[1]}}      <small>{{data[0].upper()}}</small></h1>
+</div>
+
+<div class="panel panel-default">
+  <div class="panel-body">
+    <div class="col-md-1"></div>
+    Shares owned: {{ data[4] }}<br>
+    <div class="col-md-1"></div>
+    Price as of {{data[3]}} : ${{data[2]}} <br>
+    <div class="col-md-1"></div>
+    Total value: {{ data[2] * data[4] }}
+  </div>
+</div>
+
+<br><br><br>
+
+{% endfor %}
+
+
+
+
+
+
+
+
+{% endblock %}

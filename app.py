@@ -2,7 +2,7 @@ from flask import Flask, render_template, request, session, redirect, url_for
 import hashlib
 import os
 import utils
-from  utils import accountManager, dbManager, api
+from  utils import accountManager, dbManager, api, info
 import urllib2, json
 
 app = Flask(__name__)
@@ -88,14 +88,14 @@ def feed():
     
 @app.route("/stock/<stocksymbol>")
 def stock(stocksymbol=None):
-    return render_template("stock.html", info=api.get_stock_info(stocksymbol))
+    return render_template("stock.html", data=info.get_stock_info(stocksymbol))
 
 @app.route("/myStocks")
 def myStocks():
     if 'username' in session:
         u = session["username"]
-        stuff = dbManager.get_own_stocks(u,something else)
-        return render_template("myStocks.html",stocks = stuff)
+        #stuff = dbManager.get_own_stocks(u,something else)
+        return render_template("my.html",info=info.get_user_info(u))
     
 @app.route("/buy")
 def buy():

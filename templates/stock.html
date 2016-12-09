@@ -1,24 +1,24 @@
 {% extends "basee.html" %}
 
 {% block head %}
-<title>{{info[0]}}</title>
+<title>{{data[0]}}</title>
 {% endblock %}
 
 {% block body %}
 <br><br><br><br>
 <div class="page-header">
   <div class="col-md-1"></div>
-  <h1><span class="glyphicon glyphicon-piggy-bank" aria-hidden="true"></span>   {{info[1]}}      <small>{{info[0].upper()}}</small></h1>
+  <h1><span class="glyphicon glyphicon-piggy-bank" aria-hidden="true"></span>   {{data[1]}}      <small>{{data[0].upper()}}</small></h1>
 </div>
 
 <div class="panel panel-default">
   <div class="panel-body">
     <div class="col-md-1"></div>
-    Shares owned: #SHARES <br>
+    Shares owned: {{ data[4] }}<br>
     <div class="col-md-1"></div>
-    Price as of {{info[3]}} : ${{info[2]}} <br>
+    Price as of {{data[3]}} : ${{data[2]}} <br>
     <div class="col-md-1"></div>
-    Total value: INFO2*SHARES
+    Total value: {{ data[2] * data[4] }}
   </div>
 </div>
 
@@ -34,8 +34,8 @@
 	</span>
 	<input type="text" class="form-control" placeholder="Number of shares" name="shares">
       </div><!-- /input-group -->
-<input type="hidden" name="stockName" value={{ info[0] }}>
-<input type="hidden" name="price" value={{ info[2] }}>
+<input type="hidden" name="stockName" value={{ data[0] }}>
+<input type="hidden" name="price" value={{ data[2] }}>
 </form>
     </div><!-- /.col-lg-6 -->
     <div class="col-lg-2">
@@ -46,8 +46,8 @@
 	</span>
 	<input type="text" class="form-control" placeholder="Number of shares" name="shares">
       </div><!-- /input-group -->
-<input type="hidden" name="stockName" value={{ info[0] }}>
-<input type="hidden" name="price" value={{ info[2] }}>
+<input type="hidden" name="stockName" value={{ data[0] }}>
+<input type="hidden" name="price" value={{ data[2] }}>
 </form>
     </div><!-- /.col-lg-6 -->
   </div>
