@@ -65,4 +65,11 @@ jessicaT -- 2016-12-08 05:30
 roddaJ -- 2016-12-08 15:00
 - Added proper code to get data for chart from api
 
+bayleS -- 2016-12-08 14:00
+started to link buy sell button to db
+
+bayleS -- 2016-12-08 19:00
+continued to link buy sell button to db
+
+
 ================ FRIDAY, DECEMBER 9th ================
