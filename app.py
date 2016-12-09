@@ -20,6 +20,21 @@ def loginOrRegister():
     else:
         return render_template("loginOrReg.html", username=True)
 
+# Rodda testing charts, do not touch
+@app.route('/chart/<string:symbol>')
+@app.route('/chart')
+def chart(symbol = 'AAPL'):
+    data = api.get_chart(symbol)
+
+    data_points = []
+
+    for i in range(0, len(data['Positions'])):
+        data_points.append({})
+        data_points[i]['x'] = data['Positions'][i]
+        data_points[i]['y'] = data['Elements'][0]['DataSeries']['close']['values'][i]
+
+    return render_template('chart_test.html', data_points = data_points)
+
 #handles input of the login register page
 @app.route("/authOrCreate", methods=["POST"])
 def authOrCreate():

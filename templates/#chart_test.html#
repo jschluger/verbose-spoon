@@ -1,0 +1,13 @@
+{% extends "basee.html" %}
+
+{% import "macros.html" as macros %}
+
+{% block head %}
+  <script src="{{ url_for('static', filename='js/canvasjs.min.js') }}"></script>
+  {{ macros.render_chart(data_points) }}
+{% endblock %}
+
+{% block body %}
+  <div id="chartContainer" style="height: 400px; width: 95%;"></div>
+{% endblock %}
+
