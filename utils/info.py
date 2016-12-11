@@ -20,13 +20,23 @@ def get_user_info(username):
     db = sqlite3.connect(f)
     c = db.cursor()
 
-    query = "SELECT * FROM users WHERE username == ?"
-    c.execute(query, (username,))
-    personal_info = c.fetchone()
+    q = 'SELECT funds FROM users WHERE username == "%s"'%(username)
+    c.execute(q)
+    pfunds = c.fetchone()[0]
+    q = 'SELECT fullName FROM users WHERE username == "%s"'%(username)
+    c.execute(q)
+    pname = c.fetchone()[0]
+    q = 'SELECT dob FROM users WHERE username == "%s"'%(username)
+    c.execute(q)
+    pdob = c.fetchone()[0]
+    q = 'SELECT favStock FROM users WHERE username == "%s"'%(username)
+    c.execute(q)
+    pstock = c.fetchone()[0]
     
-    pstocks_info = dbManager.get_owned_stocks(username)
+    resp = [pfunds, pname, pdob, pstock]
 
-    resp = [personal_info, pstocks_info]
+    db.commit()
+    db.close()
     return resp
 
 def search_results(search):

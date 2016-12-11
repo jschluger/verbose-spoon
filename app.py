@@ -122,7 +122,7 @@ def buy():
         s = int(formDict["shares"])
         p = int(formDict["price"])
         message = dbManager.buyStock(sn,s,p,u)
-        if (notice == "you don't got enuf money, dude"):
+        if (message == "you don't got enuf money, dude"):
             return redirect(url_for('stock',note=message))
             
         return redirect(url_for('myStocks'))
@@ -136,7 +136,7 @@ def sell():
         s = int(formDict["shares"])
         p = int(formDict["price"])
         message = dbManager.sellStock(sn,s,p,u)
-        if (notice == "you do not have enough shares of this stock to make this transaction"):
+        if (message == "you do not have enough shares of this stock to make this transaction"):
             return redirect(url_for('stock',note=message))
             
         return redirect(url_for('myStocks'))
@@ -145,9 +145,16 @@ def sell():
 def results():
     if 'username' in session:
         formDict = request.form
-        search = formDict["search"]
+        querry = formDict["search"]
         dictOfDicts = info.search_results(search)
-        return render_template("results.html",list = dictOfDicts)
+        return render_template("results.html",results = dictOfDicts, search = querry)
+
+@app.route("/profile")
+def profile():
+    if 'username' in session:
+        u = session["username"]
+        profileStuff = info.get_user_info(u)
+        return render_template("profile.html",facts = profileStuff) 
 
     
 if __name__ == "__main__":
