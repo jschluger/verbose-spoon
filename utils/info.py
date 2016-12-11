@@ -2,7 +2,7 @@ import dbManager
 import api
 
 def get_stock_info(ticker, **kwargs):
-    info = get_quote_dict(ticker)
+    info = api.get_quote_dict(ticker)
     company_name = info['Name']
     last_price = info['LastPrice']
     timestamp = info['Timestamp']
