@@ -12,18 +12,13 @@
 
 <div class="page-header">
   <div class="col-md-1"></div>
-  <h1><span class="glyphicon glyphicon-piggy-bank" aria-hidden="true"></span>   {{k[0]}}   </h1>
+<a href={{ "/stock/"+ k[1] }}>
+  <h1><span class="glyphicon glyphicon-piggy-bank" aria-hidden="true"></span>   {{k[0]}}      <small>{{k[1].upper()}}</small></h1>
+</a>
 </div>
 
-<div class="panel panel-default">
-  <div class="panel-body">
-    <div class="col-md-1"></div>
-    Stock symbol: {{ k[1] }}
-    stock link: <a href = "/stock/" + {{k[1]}}></a>
-  </div>
-</div>
 
-<br><br><br>
+<br>
 
 {% endfor %}
 

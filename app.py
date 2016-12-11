@@ -141,12 +141,14 @@ def sell():
             
         return redirect(url_for('myStocks'))
 
-@app.route("/results")
+@app.route("/results", methods=["POST"])
 def results():
+    print request.form
     if 'username' in session:
         formDict = request.form
         querry = formDict["search"]
-        dictOfDicts = info.search_results(search)
+        dictOfDicts = info.search_results(querry)
+        print dictOfDicts
         return render_template("results.html",results = dictOfDicts, search = querry)
 
 @app.route("/profile")
@@ -159,4 +161,4 @@ def profile():
     
 if __name__ == "__main__":
     app.debug = True
-    app.run()
+    app.run(host=os.getenv('IP', '0.0.0.0'),port=int(os.getenv('PORT', 8080)))

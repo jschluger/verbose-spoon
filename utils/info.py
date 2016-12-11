@@ -1,5 +1,6 @@
 import dbManager
 import api
+import sqlite3
 
 def get_stock_info(ticker, **kwargs):
     info = api.get_quote_dict(ticker)
