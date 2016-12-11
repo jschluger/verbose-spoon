@@ -41,7 +41,7 @@ def get_user_info(username):
 
 def search_results(search):
     dictOfDicts = api.lookup(search)
-    result = [][]
+    result = [[0 for x in range(len(dictOfDicts[0]))]for y in range(len(dictOfDicts))]
     for i in range(len(dictOfDicts)):
         result[i][0] = dictOfDicts[i]['Name']
         result[i][1] = dictOfDicts[i]['Symbol']
