@@ -1,7 +1,7 @@
 {% extends "basee.html" %}
 
 {% block head %}
-<title>Search results for {% search %}</title>
+<title>Search results for {{ search }}</title>
 {% endblock %}
 
 {% block body %}
@@ -10,21 +10,16 @@
 
 {% for k in results %}
 
-<a href = info.get_stock_info(k[0])></a>
-
 <div class="page-header">
   <div class="col-md-1"></div>
-  <h1><span class="glyphicon glyphicon-piggy-bank" aria-hidden="true"></span>   {{k[0]}}      <small>{{k[1].upper()}}</small></h1>
+  <h1><span class="glyphicon glyphicon-piggy-bank" aria-hidden="true"></span>   {{k[0]}}   </h1>
 </div>
 
 <div class="panel panel-default">
   <div class="panel-body">
     <div class="col-md-1"></div>
-    Shares owned: {{ data[4] }}<br>
-    <div class="col-md-1"></div>
-    Price as of {{data[3]}} : ${{data[2]}} <br>
-    <div class="col-md-1"></div>
-    Total value: {{ data[2] * data[4] }}
+    Stock symbol: {{ k[1] }}
+    stock link: <a href = "/stock/" + {{k[1]}}></a>
   </div>
 </div>
 

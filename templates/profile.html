@@ -1,0 +1,31 @@
+{% extends "basee.html" %}
+
+{% block head %}
+<title>My Profile</title>
+{% endblock %}
+
+{% block body %}
+<br><br><br><br>
+
+
+
+<div class="page-header">
+  <div class="col-md-1"></div>
+  <h1><span class="glyphicon glyphicon-piggy-bank" aria-hidden="true"></span>   {{facts[1]}}    </h1>
+</div>
+
+<div class="panel panel-default">
+  <div class="panel-body">
+    <div class="col-md-1"></div>
+    Favorite stock: {{ facts[3] }}<br>
+    <div class="col-md-1"></div>
+    Funds in account {{facts[0]}} $ <br>
+    <div class="col-md-1"></div>
+    Date of birth: {{ facts[2] }}
+  </div>
+</div>
+
+<br><br><br>
+
+
+{% endblock %}
