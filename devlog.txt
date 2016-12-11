@@ -11,7 +11,7 @@ From the assignment page:
 ================ MONDAY, DECEMBER 5th ================ 
 
 bayleS -- 2016-12-05 14:00
-added database login/register things, added initialize database
+- added database login/register things, added initialize database
 
 jackS -- 2016-12-05 20:16
 -updated design doc to reflect changes suggested during class by other teams
@@ -25,13 +25,13 @@ jessicaT -- 2016-12-06 06:00
 -made sign in/up page, made navbar look better
 
 bayleS -- 2016-12-06 14:00
-added database functionalities for buy and sell stock
+- added database functionalities for buy and sell stock
 
 jessicaT -- 2016-12-06 14:00
 -made sign in/up page work with the functions
 
 bayleS -- 2016-12-06 21:00
-added dob, full name, and fav stock properties for users
+- added dob, full name, and fav stock properties for users
 
 jordanY -- 2016-12-06 22:00
 - started working on some css formatting
@@ -42,16 +42,16 @@ roddaJ -- 2016-12-07 13:37
 Since Monday -- implemented getting stock prices from api (in api.py) as well as a lookup feature to get a list of stocks by search string.  You can also get a lot more than stock prices, as api.py can also return a dict with a lot of interesting stock related information
 
 roddaJ -- 2016-12-07 14:03
-Started working on generating correctly formatted request to get chart data from api
+- Started working on generating correctly formatted request to get chart data from api
 
 bayleS -- 2016-12-07 13:37
-made ability to change password
+- made ability to change password
 
 jordanY -- 2016-12-07 23:00
 - Began work on api access methods for feeding info to html pages
 
 bayleS -- 2016-12-07 23:59
-made restrictions on buying stock (can't buy more than money you have). Annoying bug in not being able to sell more than you have
+- made restrictions on buying stock (can't buy more than money you have). Annoying bug in not being able to sell more than you have
 
 ================ THURSDAY, DECEMBER 8th ================
 
@@ -66,10 +66,10 @@ roddaJ -- 2016-12-08 15:00
 - Added proper code to get data for chart from api
 
 bayleS -- 2016-12-08 14:00
-started to link buy sell button to db
+- started to link buy sell button to db
 
 bayleS -- 2016-12-08 19:00
-continued to link buy sell button to db
+- continued to link buy sell button to db
 
 
 ================ FRIDAY, DECEMBER 9th ================
@@ -80,3 +80,11 @@ jordanY -- 2016-12-9  2:27
 
 roddaJ -- 2016-12-09 14:04
 - Got ChartJS working in conjunction with pulling stock data from api.  Need to make it look visually appealing and playing around with some chart js options.
+
+bayleS -- 2016-12-09 14:00
+- Made results route for search results
+
+================ SUNDAY, DECEMBER 11th ================
+
+bayleS -- 2016-12-09 17:00
+- Made results template and fixed return for db things. worked on profile template and connection as well
