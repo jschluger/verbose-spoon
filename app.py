@@ -103,7 +103,7 @@ def feed():
     
 @app.route("/stock/<stocksymbol>")
 def stock(stocksymbol=None):
-    return render_template("stock.html", data=info.get_stock_info(stocksymbol))
+    return render_template("stock.html", data=info.get_stock_info(stocksymbol, username=session['username']))
 
 @app.route("/myStocks")
 def myStocks():
