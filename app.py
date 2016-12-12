@@ -16,7 +16,7 @@ f.close
 @app.route("/")
 def loginOrRegister():
     if 'username' in session:
-        return redirect("/feed")
+        return redirect("/profile")
     else:
         return render_template("loginOrReg.html", username=True)
 
@@ -50,7 +50,7 @@ def authOrCreate():
         elif statusNum == 1:
             session["username"]=username
             loginStatus = username + " logged in"
-            return redirect( "/feed" )
+            return redirect( "/profile" )
         elif statusNum == 2:
             loginStatus = "wrong password"
 
