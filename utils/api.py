@@ -33,11 +33,12 @@ def get_quote_dict(symbol):
 
     return data
 
-def get_chart(symbol, normalized = "false", number_of_days = 365, data_period = 'Day', type = 'price'):
+def get_chart(symbol, normalized = "false", number_of_days = 365, data_period = 'Day', type = 'price', data_interval = 1):
     data = {}
     data['Normalized'] = normalized
     data['NumberOfDays'] = number_of_days
     data['DataPeriod'] = data_period
+#    data['DataInterval'] = data_interval
     to_graph = {}
     to_graph['Symbol'] = symbol
     to_graph['Type'] = "price"

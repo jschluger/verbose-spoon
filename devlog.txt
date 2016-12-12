@@ -103,3 +103,6 @@ jordanY -- 2016-12-12 1:40
 
 roddaJ -- 2016-12-12 14:04
 - Charts are fully functional
+
+roddaJ -- 2016-12-12 15:31
+- Added buttons to shift between charts, tried unsuccessfully to get the resolution down to hourly or by minute.  There seems to be an issue either in the documentation or in their api.

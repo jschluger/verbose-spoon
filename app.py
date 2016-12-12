@@ -23,8 +23,9 @@ def loginOrRegister():
 # Rodda testing charts, do not touch
 @app.route('/chart/<string:symbol>')
 @app.route('/chart')
-def chart(symbol = 'AAPL'):
-    data = api.get_chart(symbol)
+@app.route('/chart/<string:symbol>/<int:days>')
+def chart(symbol = 'AAPL', days = 365):
+    data = api.get_chart(symbol, number_of_days = days)
 
     data_points = []
 
@@ -33,7 +34,7 @@ def chart(symbol = 'AAPL'):
         data_points[i]['x'] = data['Dates'][i]
         data_points[i]['y'] = data['Elements'][0]['DataSeries']['close']['values'][i]
 
-    return render_template('chart_test.html', data_points = data_points, data = data)
+    return render_template('chart_test.html', data_points = data_points, data = data, symbol = symbol, days = days)
 
 #handles input of the login register page
 @app.route("/authOrCreate", methods=["POST"])

@@ -12,6 +12,16 @@
     <br>
     <br>
     <br>
+    <div class="btn-group">
+      <a href="{{ url_for('chart', symbol = symbol, days = 14) }}" class="btn btn-primary">2w</a>
+      <a href="{{ url_for('chart', symbol = symbol, days = 31) }}" class="btn btn-primary">1m</a>
+      <a href="{{ url_for('chart', symbol = symbol, days = 62) }}" class="btn btn-primary">2m</a>
+      <a href="{{ url_for('chart', symbol = symbol, days = 182) }}" class="btn btn-primary">6m</a>
+      <a href="{{ url_for('chart', symbol = symbol, days = 365) }}" class="btn btn-primary">1y</a>
+      <a href="{{ url_for('chart', symbol = symbol, days = 730) }}" class="btn btn-primary">2y</a>
+      <a href="{{ url_for('chart', symbol = symbol, days = 1825) }}" class="btn btn-primary">5y</a>
+      <a href="{{ url_for('chart', symbol = symbol, days = 3650) }}" class="btn btn-primary">10y</a>
+    </div>
     <div id="chartContainer" style="height: 600px; width: 100%;"></div>
   </div>
 {% endblock %}
