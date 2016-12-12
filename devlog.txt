@@ -100,3 +100,6 @@ jessicaT -- 2016-12-11 19:30
 
 jordanY -- 2016-12-12 1:40
 - fixed stock info function, made a few edits to other files
+
+roddaJ -- 2016-12-12 14:04
+- Charts are fully functional
