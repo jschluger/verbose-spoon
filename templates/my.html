@@ -10,20 +10,20 @@
 
 {% for k in info %}
 
-
 <div class="page-header">
   <div class="col-md-1"></div>
-  <h1><span class="glyphicon glyphicon-piggy-bank" aria-hidden="true"></span>   {{k[1]}}      <small>{{k[0].upper()}}</small></h1>
+<a href={{ "/stock/"+ k[0] }}>
+  <h1><span class="glyphicon glyphicon-piggy-bank" aria-hidden="true"></span>   {{k[0]}}      </h1>
+</a>
 </div>
 
-<div class="panel panel-default">
-  <div class="panel-body">
+
+<br>
+
+    Shares owned: {{ k[1] }}<br>
     <div class="col-md-1"></div>
-    Shares owned: {{ k[4] }}<br>
-    <div class="col-md-1"></div>
-    Price as of {{k[3]}} : ${{k[2]}} <br>
-    <div class="col-md-1"></div>
-    Total value: {{ k[2] * k[4] }}
+
+
   </div>
 </div>
 
@@ -32,10 +32,9 @@
 {% endfor %}
 
 
-
-
-
-
-
-
 {% endblock %}
+
+
+<!--Price as of {{k[3]}} : ${{k[2]}} <br>-->
+<!-- <div class="col-md-1"></div>-->
+<!-- Total value: {{ k[2] * k[4] }}-->

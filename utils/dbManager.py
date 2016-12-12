@@ -116,9 +116,13 @@ def get_owned_stocks(username, **kwargs):
             num_stocks = 0
         return num_stocks
     
-    query = "SELECT * FROM stocks WHERE username == ?"
-    c.execute(query, (username,))
-    result = c.fetchall()
+    query = 'SELECT * FROM stocks WHERE username == "%s"'%(username)
+    c.execute(query)
+    r = c.fetchall()
+    result = [[0 for x in range(len(r[0]))]for y in range(len(r))]
+    for i in range(len(r)):
+        result[i][0] = r[i][1]
+        result[i][1] = r[i][2]
     db.commit()
     db.close()
 

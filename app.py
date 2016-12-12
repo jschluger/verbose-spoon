@@ -109,7 +109,8 @@ def stock(stocksymbol=None):
 def myStocks():
     if 'username' in session:
         u = session["username"]
-        return render_template("my.html",info=dbManager.get_owned_stocks(u))
+        tlist = dbManager.get_owned_stocks(u)
+        return render_template("my.html",info = tlist)
     else:
         return redirect(url_for('loginOrRegister'))
     
@@ -148,7 +149,7 @@ def results():
         querry = formDict["search"]
         dictOfDicts = info.search_results(querry)
         print dictOfDicts
-        return render_template("results.html",results = dictOfDicts, search = querry)
+        return render_template("results.html", results = dictOfDicts, search = querry)
 
 @app.route("/profile", methods=["GET","POST"])
 def profile():
