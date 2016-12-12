@@ -4,10 +4,15 @@
 
 {% block head %}
   <script src="{{ url_for('static', filename='js/canvasjs.min.js') }}"></script>
-  {{ macros.render_chart(data_points) }}
+  {{ macros.render_chart(data_points, data) }}
 {% endblock %}
 
 {% block body %}
-  <div id="chartContainer" style="height: 400px; width: 100%;"></div>
+  <div class="container">
+    <br>
+    <br>
+    <br>
+    <div id="chartContainer" style="height: 600px; width: 100%;"></div>
+  </div>
 {% endblock %}
 

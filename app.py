@@ -30,10 +30,10 @@ def chart(symbol = 'AAPL'):
 
     for i in range(0, len(data['Positions'])):
         data_points.append({})
-        data_points[i]['x'] = data['Positions'][i]
+        data_points[i]['x'] = data['Dates'][i]
         data_points[i]['y'] = data['Elements'][0]['DataSeries']['close']['values'][i]
 
-    return render_template('chart_test.html', data_points = data_points)
+    return render_template('chart_test.html', data_points = data_points, data = data)
 
 #handles input of the login register page
 @app.route("/authOrCreate", methods=["POST"])

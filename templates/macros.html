@@ -1,14 +1,14 @@
-{% macro render_chart(data_points) %}
+{% macro render_chart(data_points, data) %}
   <script type="text/javascript">
     window.onload = function() {
     var chart = new CanvasJS.Chart("chartContainer", {
-    title: {text: "Line Chart"},
+    title: {text: "{{ data['Elements'][0]['Symbol'] }}"},
     axisX: {interval: 10},
     data: [{
     type: "line",
     dataPoints:[
     {% for data_point in data_points %}
-      {x: {{ data_point['x'] }}, y: {{ data_point['y'] }}},
+      {x: new Date({{ data_point['x'].split('-')[0] }}, {{ (data_point['x'].split('-')[1])|int - 1 }}, {{ data_point['x'].split('-')[2].split('T')[0] }}, {{ data_point['x'].split('T')[1].split(':')[0] }}, {{ data_point['x'].split('T')[1].split(':')[1] }}, {{ data_point['x'].split('T')[1].split(':')[2] }}, 0), y: {{ data_point['y'] }}},
     {% endfor %}
     ]
     }]

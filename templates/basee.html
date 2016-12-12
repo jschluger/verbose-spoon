@@ -5,62 +5,44 @@
     {% block head %}
     {% endblock %}
   </head>
-
-
-
-  <nav class="navbar navbar-inverse navbar-fixed-top">
-    <div class="container">
-      
-      <!-- Brand and toggle get grouped for better mobile display -->
-      <div class="navbar-header">
-	<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-	</button>
-	<a class="navbar-brand" href="feed">Verbose Stock Exchange</a>
-      </div>
+  <body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+	<!-- Brand and toggle get grouped for better mobile display -->
+	<div class="navbar-header">
+	  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+	  </button>
+	  <a class="navbar-brand" href="feed">Verbose Stock Exchange</a>
+	</div>
 
       {% if "username" in session %}
+	<form class="navbar-form navbar-right" method="POST" action="{{ url_for('results') }}">
+	  <div class="form-group">
+	    <input type="text" class="form-control" placeholder="Ticker Symbol" name="search">
+	  </div>
+	  <button type="submit" class="btn btn-default" name="srch" value="srch"><span class="glyphicon glyphicon-search" aria-hidden="true"></span> </button>
+	</form>
 
-
-      <form class="navbar-form navbar-right" method="POST" action="{{ url_for('results') }}">
-	<div class="form-group">
-	  <input type="text" class="form-control" placeholder="Ticker Symbol" name="search">
-	</div>
-	<button type="submit" class="btn btn-default" name="srch" value="srch"><span class="glyphicon glyphicon-search" aria-hidden="true"></span> </button>
-      </form>
-
-      <p class="navbar-text navbar-right">     </p>
-<form method="POST" action="{{ url_for('feed') }}">
-      <button type="submit" class="btn btn-default navbar-btn navbar-right">Feed</button>
-</form>
-      <p class="navbar-text navbar-right">     </p>
-      <button type="button" class="btn btn-default navbar-btn navbar-right">Portfolio</button>
-      <p class="navbar-text navbar-right">     </p>
-<form method="POST" action="{{ url_for('profile') }}">
-  <p class="navbar-text navbar-right">     </p>
-      <button type="submit" class="btn btn-default navbar-btn navbar-right" value="prof" name="prof">Profile</button>
-</form>
-
+	<p class="navbar-text navbar-right">     </p>
+	<form method="POST" action="{{ url_for('feed') }}">
+	  <button type="submit" class="btn btn-default navbar-btn navbar-right">Feed</button>
+	</form>
+	<p class="navbar-text navbar-right">     </p>
+	<button type="button" class="btn btn-default navbar-btn navbar-right">Portfolio</button>
+	<p class="navbar-text navbar-right">     </p>
+	<form method="POST" action="{{ url_for('profile') }}">
+	  <p class="navbar-text navbar-right">     </p>
+	  <button type="submit" class="btn btn-default navbar-btn navbar-right" value="prof" name="prof">Profile</button>
+	</form>
       {% endif %}
-
-
-
-    </div>
-  </nav>
-
-
-
-
-
-
-
-
-
-  {% block body %}
-  {% endblock %}
-  <script src="/static/js/bootstrap.js"></script>
-</body>
+      </div>
+    </nav>
+    {% block body %}
+    {% endblock %}
+    <script src="/static/js/bootstrap.js"></script>
+  </body>
 </html>
