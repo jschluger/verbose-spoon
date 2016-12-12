@@ -18,8 +18,10 @@ c = db.cursor()    #facilitate db ops
 q = "CREATE TABLE users (username TEXT, password TEXT, userId INTEGER, funds FLOAT, fullName TEXT, dob INTEGER, favStock TEXT)"
 c.execute(q)
 
+print "g"
 q="CREATE TABLE stocks (username TEXT, stockName TEXT, shares INTEGER)"
 c.execute(q)
+print "g"
 
 db.commit()
 db.close()

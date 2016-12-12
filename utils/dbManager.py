@@ -27,6 +27,8 @@ def buyStock(stockName, shares, price, username):
             p = 'UPDATE stocks SET shares = %d WHERE username == "%s" AND stockName == "%s"'%(newShares, username, stockName)
             c.execute(p)
     else:
+        db.commit()
+        db.close()
         return "you don't got enuf money, dude"
     
     db.commit()
@@ -73,9 +75,10 @@ def enufMoney(username,shares,price):
     trying = shares*price
     p = 'SELECT funds FROM users WHERE username == "%s"'%(username)
     c.execute(p)
+    available = c.fetchone()[0]
     db.commit()
     db.close()
-    return (c.fetchone()[0] > trying)
+    return (available > trying)
 
 def canYouEvenSell(username,stockName,shares):
     f = "database.db"
@@ -105,7 +108,13 @@ def get_owned_stocks(username, **kwargs):
         query = "SELECT * FROM stocks WHERE username == ? AND stockName == ?"
         c.execute(query, (username, kwargs['symbol'],))
         result = c.fetchall()
-        return result
+        db.commit()
+        db.close()
+        if result:
+            num_stocks = result[0][2]
+        else:
+            num_stocks = 0
+        return num_stocks
     
     query = "SELECT * FROM stocks WHERE username == ?"
     c.execute(query, (username,))
@@ -114,5 +123,7 @@ def get_owned_stocks(username, **kwargs):
     db.close()
 
     return result
+
+
 
 

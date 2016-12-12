@@ -67,3 +67,5 @@ def lookup(search_term):
     
     
     
+d = get_quote_dict("CHK")
+print d['Name']

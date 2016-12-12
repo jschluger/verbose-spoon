@@ -4,17 +4,18 @@ import sqlite3
 
 def get_stock_info(ticker, **kwargs):
     info = api.get_quote_dict(ticker)
+    if isinstance(info, basestring):
+        return info
     company_name = info['Name']
     last_price = info['LastPrice']
     timestamp = info['Timestamp']
     resp = [ticker, company_name, last_price, timestamp]
     if 'username' in kwargs:
-        my_info = dbManager.get_owned_stocks(ticker)
-        num_stocks = my_info[0][2]
-        resp.extend(num_stocks)
+        num_stocks = dbManager.get_owned_stocks(kwargs['username'],symbol=ticker)
+        resp.append(num_stocks)
     return resp
 
-
+#print get_stock_info("CHK", username='jordan')
 
 def get_user_info(username):
     f = "database.db"
