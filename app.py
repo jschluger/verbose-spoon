@@ -18,7 +18,7 @@ def loginOrRegister():
     if 'username' in session:
         return redirect("/feed")
     else:
-        return render_template("loginOrReg.html", username=True)
+        return render_template("loginOrReg.html", username=True, message=False)
 
 # Rodda testing charts, do not touch
 @app.route('/chart/<string:symbol>')
@@ -54,7 +54,7 @@ def authOrCreate():
         elif statusNum == 2:
             loginStatus = "wrong password"
 
-        return render_template("loginOrReg.html",status=loginStatus)
+        return render_template("loginOrReg.html",status=loginStatus, message=True)
 
     elif formDict["logOrReg"] == "register":  #registering
         username = formDict["username"]
@@ -69,7 +69,7 @@ def authOrCreate():
         elif statusNum == 2:
             registerStatus = username +" account created"
 
-        return render_template("loginOrReg.html",status=registerStatus) #status is the login/creation messate 
+        return render_template("loginOrReg.html",status=registerStatus, message=True) #status is the login/creation messate 
     else:
         return redirect(url_for("loginOrReg"))
 
