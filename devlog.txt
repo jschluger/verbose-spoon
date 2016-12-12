@@ -78,6 +78,9 @@ jordanY -- 2016-12-9  2:27
 - moved stock info method from api.py to info.py
 - added new function to info.py that accesses user's personal info and info about stocks they own
 
+jessicaT -- 2016-12-09 06:00
+-made mystocks page
+
 roddaJ -- 2016-12-09 14:04
 - Got ChartJS working in conjunction with pulling stock data from api.  Need to make it look visually appealing and playing around with some chart js options.
 
@@ -88,3 +91,6 @@ bayleS -- 2016-12-09 14:00
 
 bayleS -- 2016-12-09 17:00
 - Made results template and fixed return for db things. worked on profile template and connection as well
+
+jessicaT -- 2016-12-11 19:30
+-made navbar search and buttons do stuff and fixed results template 
