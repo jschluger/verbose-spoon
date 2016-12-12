@@ -113,7 +113,7 @@ def myStocks():
     else:
         return redirect(url_for('loginOrRegister'))
     
-@app.route("/buy")
+@app.route("/buy", methods=["POST"])
 def buy():
     if 'username' in session:
         u = session["username"]
@@ -127,7 +127,7 @@ def buy():
             
         return redirect(url_for('myStocks'))
         
-@app.route("/sell")
+@app.route("/sell", methods=["POST"])
 def sell():
     if 'username' in session:
         u = session["username"]
