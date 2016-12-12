@@ -120,7 +120,7 @@ def buy():
         formDict = request.form
         sn = formDict["stockName"]
         s = int(formDict["shares"])
-        p = int(formDict["price"])
+        p = float(formDict["price"])
         message = dbManager.buyStock(sn,s,p,u)
         if (message == "you don't got enuf money, dude"):
             return redirect(url_for('stock',note=message))
@@ -134,7 +134,7 @@ def sell():
         formDict = request.form
         sn = formDict["stockName"]
         s = int(formDict["shares"])
-        p = int(formDict["price"])
+        p = float(formDict["price"])
         message = dbManager.sellStock(sn,s,p,u)
         if (message == "you do not have enough shares of this stock to make this transaction"):
             return redirect(url_for('stock',note=message))
