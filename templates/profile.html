@@ -5,27 +5,30 @@
 {% endblock %}
 
 {% block body %}
-<br><br><br><br>
+<br><br><br><br><br><br><br>
 
 
 
-<div class="page-header">
-  <div class="col-md-1"></div>
-  <h1><span class="glyphicon glyphicon-piggy-bank" aria-hidden="true"></span>   {{facts[1]}}    </h1>
-</div>
 
 <div class="panel panel-default">
   <div class="panel-body">
     <div class="col-md-1"></div>
     Favorite stock: {{ facts[3] }}<br>
     <div class="col-md-1"></div>
-    Funds in account {{facts[0]}} $ <br>
+    Funds in account ${{facts[0]}} <br>
     <div class="col-md-1"></div>
     Date of birth: {{ facts[2] }}
   </div>
 </div>
 
 <br><br><br>
+
+
+<div class="col-md-8">
+<form method="POST" action="{{ url_for('logout') }}">
+  <button type="submit" class="btn btn-default navbar-btn navbar-right" value="lo" name="lo">Logout</button>
+</form>
+</div>
 
 
 {% endblock %}

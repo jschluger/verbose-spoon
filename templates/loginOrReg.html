@@ -7,6 +7,8 @@
 
 {% block body %}
 <br><br><br>
+  <div class="alert alert-info" role="alert"><p class="text-center">IF & RED/GREEN</p></div>        
+
 <div class="container">
   <div class="row-fluid">
     <div class="span12">
@@ -66,42 +68,42 @@
 		
 		<div class="controls">
                   <input id="inputEmail" placeholder=
-                       "E.g. ashwinh@cybage.com" type="text" name="username">
+			 "E.g. ashwinh@cybage.com" type="text" name="username">
+		</div>
               </div>
-            </div>
 
-            <div class="control-group">
-              <label class="control-label" for=
-                     "inputUser">Password</label>
+              <div class="control-group">
+		<label class="control-label" for=
+                       "inputUser">Password</label>
 
-              <div class="controls">
-                <input id="inputUser" placeholder=
-                       "E.g. ashwinhegde" type="password" name="password">
+		<div class="controls">
+                  <input id="inputUser" placeholder=
+			 "E.g. ashwinhegde" type="password" name="password">
+		</div>
               </div>
-            </div>
 
-            <div class="control-group">
-              <label class="control-label" for=
-                     "inputPassword">Confirm Password</label>
+              <div class="control-group">
+		<label class="control-label" for=
+                       "inputPassword">Confirm Password</label>
 
-              <div class="controls">
-                <input id="inputPassword" placeholder=
-                       "Min. 8 Characters" type="password" name="pwd">
+		<div class="controls">
+                  <input id="inputPassword" placeholder=
+			 "Min. 8 Characters" type="password" name="pwd">
+		</div>
               </div>
-            </div>
-
-            <div class="control-group">
-              <div class="controls">
- <button class="btn btn-success" type="submit" value="register" name="logOrReg">Sign
-                  Up</button> 
+	      <br>
+              <div class="control-group">
+		<div class="controls">
+		  <button class="btn btn-success" type="submit" value="register" name="logOrReg">Sign
+                    Up</button> 
+		</div>
               </div>
-            </div>
 
           </form>
-        </div>
+          </div>
+	</div>
       </div>
     </div>
   </div>
-</div>
-
-{% endblock %}
+                
+  {% endblock %}

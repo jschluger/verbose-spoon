@@ -143,7 +143,6 @@ def sell():
 
 @app.route("/results", methods=["POST"])
 def results():
-    print request.form
     if 'username' in session:
         formDict = request.form
         querry = formDict["search"]
@@ -151,7 +150,7 @@ def results():
         print dictOfDicts
         return render_template("results.html",results = dictOfDicts, search = querry)
 
-@app.route("/profile")
+@app.route("/profile", methods=["GET","POST"])
 def profile():
     if 'username' in session:
         u = session["username"]
@@ -161,4 +160,4 @@ def profile():
     
 if __name__ == "__main__":
     app.debug = True
-    app.run(host=os.getenv('IP', '0.0.0.0'),port=int(os.getenv('PORT', 8080)))
+    app.run()
