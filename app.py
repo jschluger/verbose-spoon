@@ -16,9 +16,9 @@ f.close
 @app.route("/")
 def loginOrRegister():
     if 'username' in session:
-        return redirect("/feed")
+        return redirect("/profile")
     else:
-        return render_template("loginOrReg.html", username=True)
+        return render_template("loginOrReg.html", username=True, message=False)
 
 # Rodda testing charts, do not touch
 @app.route('/chart/<string:symbol>')
@@ -50,11 +50,11 @@ def authOrCreate():
         elif statusNum == 1:
             session["username"]=username
             loginStatus = username + " logged in"
-            return redirect( "/feed" )
+            return redirect( "/profile" )
         elif statusNum == 2:
             loginStatus = "wrong password"
 
-        return render_template("loginOrReg.html",status=loginStatus)
+        return render_template("loginOrReg.html",status=loginStatus, message=True)
 
     elif formDict["logOrReg"] == "register":  #registering
         username = formDict["username"]
@@ -69,7 +69,7 @@ def authOrCreate():
         elif statusNum == 2:
             registerStatus = username +" account created"
 
-        return render_template("loginOrReg.html",status=registerStatus) #status is the login/creation messate 
+        return render_template("loginOrReg.html",status=registerStatus, message=True) #status is the login/creation messate 
     else:
         return redirect(url_for("loginOrReg"))
 
@@ -103,38 +103,39 @@ def feed():
     
 @app.route("/stock/<stocksymbol>")
 def stock(stocksymbol=None):
-    return render_template("stock.html", data=info.get_stock_info(stocksymbol))
+    return render_template("stock.html", data=info.get_stock_info(stocksymbol, username=session['username']))
 
 @app.route("/myStocks")
 def myStocks():
     if 'username' in session:
         u = session["username"]
-        return render_template("my.html",info=info.get_user_info(u))
+        tlist = dbManager.get_owned_stocks(u)
+        return render_template("my.html",info = tlist)
     else:
         return redirect(url_for('loginOrRegister'))
     
-@app.route("/buy")
+@app.route("/buy", methods=["POST"])
 def buy():
     if 'username' in session:
         u = session["username"]
         formDict = request.form
         sn = formDict["stockName"]
         s = int(formDict["shares"])
-        p = int(formDict["price"])
+        p = float(formDict["price"])
         message = dbManager.buyStock(sn,s,p,u)
         if (message == "you don't got enuf money, dude"):
             return redirect(url_for('stock',note=message))
             
         return redirect(url_for('myStocks'))
         
-@app.route("/sell")
+@app.route("/sell", methods=["POST"])
 def sell():
     if 'username' in session:
         u = session["username"]
         formDict = request.form
         sn = formDict["stockName"]
         s = int(formDict["shares"])
-        p = int(formDict["price"])
+        p = float(formDict["price"])
         message = dbManager.sellStock(sn,s,p,u)
         if (message == "you do not have enough shares of this stock to make this transaction"):
             return redirect(url_for('stock',note=message))
@@ -148,7 +149,7 @@ def results():
         querry = formDict["search"]
         dictOfDicts = info.search_results(querry)
         print dictOfDicts
-        return render_template("results.html",results = dictOfDicts, search = querry)
+        return render_template("results.html", results = dictOfDicts, search = querry)
 
 @app.route("/profile", methods=["GET","POST"])
 def profile():

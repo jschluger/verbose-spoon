@@ -7,7 +7,13 @@
 
 {% block body %}
 <br><br><br>
-  <div class="alert alert-info" role="alert"><p class="text-center">IF & RED/GREEN</p></div>        
+
+
+{% if message %}
+
+  <div class="alert alert-info" role="alert"><p class="text-center">{{ status }}</p></div>    
+
+{% endif %}    
 
 <div class="container">
   <div class="row-fluid">
