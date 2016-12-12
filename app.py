@@ -103,7 +103,7 @@ def feed():
     
 @app.route("/stock/<stocksymbol>")
 def stock(stocksymbol=None):
-    return render_template("stock.html", data=info.get_stock_info(stocksymbol))
+    return render_template("stock.html", data=info.get_stock_info(stocksymbol, username=session['username']))
 
 @app.route("/myStocks")
 def myStocks():
@@ -113,28 +113,28 @@ def myStocks():
     else:
         return redirect(url_for('loginOrRegister'))
     
-@app.route("/buy")
+@app.route("/buy", methods=["POST"])
 def buy():
     if 'username' in session:
         u = session["username"]
         formDict = request.form
         sn = formDict["stockName"]
         s = int(formDict["shares"])
-        p = int(formDict["price"])
+        p = float(formDict["price"])
         message = dbManager.buyStock(sn,s,p,u)
         if (message == "you don't got enuf money, dude"):
             return redirect(url_for('stock',note=message))
             
         return redirect(url_for('myStocks'))
         
-@app.route("/sell")
+@app.route("/sell", methods=["POST"])
 def sell():
     if 'username' in session:
         u = session["username"]
         formDict = request.form
         sn = formDict["stockName"]
         s = int(formDict["shares"])
-        p = int(formDict["price"])
+        p = float(formDict["price"])
         message = dbManager.sellStock(sn,s,p,u)
         if (message == "you do not have enough shares of this stock to make this transaction"):
             return redirect(url_for('stock',note=message))
