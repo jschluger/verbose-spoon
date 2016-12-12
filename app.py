@@ -109,7 +109,7 @@ def stock(stocksymbol=None):
 def myStocks():
     if 'username' in session:
         u = session["username"]
-        return render_template("my.html",info=info.get_user_info(u))
+        return render_template("my.html",info=dbManager.get_owned_stocks(u))
     else:
         return redirect(url_for('loginOrRegister'))
     
