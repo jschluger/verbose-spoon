@@ -112,4 +112,7 @@ roddaJ -- 2016-12-12 15:31
 
 bayleS -- 2016-12-12 21:00
 - added search message
-- added buy/sell  error
+- added buy/sell error
+
+roddaJ -- 2016-12-12 21:52
+- Linked the charts with the stock page

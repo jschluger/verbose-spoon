@@ -103,8 +103,18 @@ def feed():
 
     
 @app.route("/stock/<stocksymbol>")
-def stock(stocksymbol=None):
-    return render_template("stock.html", data=info.get_stock_info(stocksymbol, username=session['username']))
+@app.route("/stock/<stocksymbol>/<int:days>")
+def stock(stocksymbol=None, days = 14):
+    data = api.get_chart(stocksymbol, number_of_days = days)
+
+    data_points = []
+
+    for i in range(0, len(data['Positions'])):
+        data_points.append({})
+        data_points[i]['x'] = data['Dates'][i]
+        data_points[i]['y'] = data['Elements'][0]['DataSeries']['close']['values'][i]
+
+    return render_template("stock.html", data=info.get_stock_info(stocksymbol, username=session['username']), data_points = data_points, d = data, symbol = stocksymbol, days = days)
 
 @app.route("/myStocks")
 def myStocks():
