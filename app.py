@@ -164,13 +164,14 @@ def results():
 def profile():
     if 'username' in session:
         u = session["username"]
-        formDict = request.form
-        dob = formDict["dob"]
-        accountManager.updateDob(u,dob)
-        favStock = formDict["favStock"]
-        accountManager.updateFav(u,favStock)
-        fullName = formDict["fullName"]
-        accountManager.updateFullName(u,fullName)        
+        if request.method == "POST":
+            formDict = request.form
+            dob = formDict["dob"]
+            accountManager.updateDob(u,dob)
+            favStock = formDict["favStock"]
+            accountManager.updateFav(u,favStock)
+            fullName = formDict["fullName"]
+            accountManager.updateFullName(u,fullName)        
         profileStuff = info.get_user_info(u)
         return render_template("profile.html",facts = profileStuff) 
 
