@@ -160,20 +160,26 @@ def results():
         dictOfDicts = info.search_results(querry)
         return render_template("results.html", results = dictOfDicts, search = querry)
 
-@app.route("/profile", methods=["GET","POST"])
+@app.route("/profile", methods=["POST","GET"])
 def profile():
     if 'username' in session:
         u = session["username"]
-        if request.method == "POST":
-            formDict = request.form
-            dob = formDict["dob"]
-            accountManager.updateDob(u,dob)
-            favStock = formDict["favStock"]
-            accountManager.updateFav(u,favStock)
-            fullName = formDict["fullName"]
-            accountManager.updateFullName(u,fullName)        
         profileStuff = info.get_user_info(u)
-        return render_template("profile.html",facts = profileStuff) 
+        return render_template("profile.html",facts = profileStuff)
+
+@app.route("/edit_profile", methods=["POST","GET"])
+def edit_profile():
+    if 'username' in session:
+        u = session["username"]
+        formDict = request.form
+        dob = formDict["dob"]
+        accountManager.updateDob(u,dob)
+        favStock = formDict["favStock"]
+        accountManager.updateFav(u,favStock)
+        fullName = formDict["fullName"]
+        accountManager.updateFullName(u,fullName)        
+        profileStuff = info.get_user_info(u)
+        return redirect(url_for('profile'))
 
     
 if __name__ == "__main__":

@@ -15,24 +15,19 @@
   <h3>Personal info</h3>
 </div>
   <br><br><br><br>      
-  <form class="form-horizontal" role="form">
-    <div class="form-group">
-        <div class="form-group">
-      <label class="col-lg-3 control-label">Full Name:</label>
-      <div class="col-lg-8">
-        <input class="form-control" type="text" name="fullName" value={{facts[1] }}>
-      </div>
+  <form class="form-horizontal" role="form" method="GET" action="{{ url_for('edit_profile') }}">
+   <label class="col-lg-3 control-label">Full name:</label>                                                                                 
+    <div class="col-lg-8">
+      <div class="well well-sm">{{ facts[1] }}</div>     
     </div>
-      <label class="col-lg-3 control-label">Date of birth:</label>
-      <div class="col-lg-8">
-        <input class="form-control" type="text" name="dob" value={{ facts[2] }}>
-      </div>
+       <label class="col-lg-3 control-label">Date of birth:</label>                                                                                 
+    <div class="col-lg-8">
+      <div class="well well-sm">{{ facts[2] }}</div>     
     </div>
-    <div class="form-group">
-      <label class="col-lg-3 control-label">Favorite stock:</label>
-      <div class="col-lg-8">
-        <input class="form-control" type="text" name="favStock" value={{facts[3] }}>
-      </div>
+    
+   <label class="col-lg-3 control-label">Favorite stock:</label>                                                                                 
+    <div class="col-lg-8">
+      <div class="well well-sm">{{ facts[3] }}</div>     
     </div>
     
     <label class="col-lg-3 control-label">Funds in account:</label>                                                                                 
@@ -44,7 +39,7 @@
     <div class="form-group">
       <label class="col-md-3 control-label"></label>
       <div class="col-md-8">
-        <input type="button" class="btn btn-primary" value="Save Changes">
+        <input type="submit" class="btn btn-primary" value="Edit Profile">
         <span></span>
         <input type="reset" class="btn btn-default" value="Cancel">
       </div>
