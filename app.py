@@ -40,7 +40,6 @@ def chart(symbol = 'AAPL', days = 365):
 @app.route("/authOrCreate", methods=["POST"])
 def authOrCreate():
     formDict = request.form
-    print formDict
     if formDict["logOrReg"] == "login":
         username = formDict["username"]
         password = formDict["password"]
@@ -114,9 +113,9 @@ def stock(stocksymbol=None, days = 14):
         data_points[i]['x'] = data['Dates'][i]
         data_points[i]['y'] = data['Elements'][0]['DataSeries']['close']['values'][i]
 
-    return render_template("stock.html", data=info.get_stock_info(stocksymbol, username=session['username']), data_points = data_points, d = data, symbol = stocksymbol, days = days)
+    return render_template("stock.html", data=info.get_stock_info(stocksymbol, username=session['username']), data_points = data_points, d = data, symbol = stocksymbol, days = days, msg=False)
 
-@app.route("/myStocks")
+@app.route("/myStocks", methods=["GET","POST"])
 def myStocks():
     if 'username' in session:
         u = session["username"]
@@ -135,7 +134,7 @@ def buy():
         p = float(formDict["price"])
         message = dbManager.buyStock(sn,s,p,u)
         if (message == "you don't got enuf money, dude"):
-            return redirect(url_for('stock',note=message))
+            return redirect(url_for('stock',note=message, msg=True, stocksymbol=formDict["stockSymbol"], days=formDict["days"]))
             
         return redirect(url_for('myStocks'))
         
@@ -149,7 +148,7 @@ def sell():
         p = float(formDict["price"])
         message = dbManager.sellStock(sn,s,p,u)
         if (message == "you do not have enough shares of this stock to make this transaction"):
-            return redirect(url_for('stock',note=message))
+            return redirect(url_for('stock',note=message, msg=True, stocksymbol=formDict["stockSymbol"], days=formDict["days"]))
             
         return redirect(url_for('myStocks'))
 
@@ -159,7 +158,6 @@ def results():
         formDict = request.form
         querry = formDict["search"]
         dictOfDicts = info.search_results(querry)
-        print dictOfDicts
         return render_template("results.html", results = dictOfDicts, search = querry)
 
 @app.route("/profile", methods=["GET","POST"])

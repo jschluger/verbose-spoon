@@ -27,6 +27,19 @@
     </div>
   </div>
   
+
+
+{% if msg %}
+<div class="alert alert-danger alert-dismissible" role="alert">
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+  <strong>Nahhh</strong> {{ note }}
+</div>
+{% endif %}
+
+
+
+
+
   <br><br><br>
   <div class="alert alert-info" role="alert">
     <div class="row">
@@ -41,6 +54,9 @@
 	  </div><!-- /input-group -->
 	  <input type="hidden" name="stockName" value={{ data[0] }}>
 	  <input type="hidden" name="price" value={{ data[2] }}>
+<input type="hidden" name="stockSymbol" value={{ data[0] }}>
+<input type="hidden" name="days" value={{ days }}>
+
 	</form>
     </div><!-- /.col-lg-6 -->
       <div class="col-lg-2">
@@ -53,6 +69,9 @@
 	  </div><!-- /input-group -->
 	  <input type="hidden" name="stockName" value={{ data[0] }}>
 	  <input type="hidden" name="price" value={{ data[2] }}>
+<input type="hidden" name="stockSymbol" value={{ data[0] }}>
+<input type="hidden" name="days" value={{ days }}>
+
 	</form>
     </div><!-- /.col-lg-6 -->
     </div>

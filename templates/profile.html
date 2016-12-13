@@ -9,26 +9,46 @@
 
 
 
-
-<div class="panel panel-default">
-  <div class="panel-body">
-    <div class="col-md-1"></div>
-    Favorite stock: {{ facts[3] }}<br>
-    <div class="col-md-1"></div>
-    Funds in account ${{facts[0]}} <br>
-    <div class="col-md-1"></div>
-    Date of birth: {{ facts[2] }}
-  </div>
+<!-- edit form column -->
+<div class="col-md-6 personal-info">
+<div class="col-md-12">
+  <h3>Personal info</h3>
 </div>
+  <br><br><br><br>      
+  <form class="form-horizontal" role="form">
+    <div class="form-group">
+      <label class="col-lg-3 control-label">Date of birth:</label>
+      <div class="col-lg-8">
+        <input class="form-control" type="text" value={{ facts[2] }}>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-lg-3 control-label">Favorite stock:</label>
+      <div class="col-lg-8">
+        <input class="form-control" type="text" value="{{facts[3] }}">
+      </div>
+    </div>
+    
+    <label class="col-lg-3 control-label">Funds in account:</label>                                                                                 
+    <div class="col-lg-8">
+      <div class="well well-sm">${{ facts[0] }}</div>     
+    </div>
+    <br><br>
 
-<br><br><br>
-
-
-<div class="col-md-8">
-<form method="POST" action="{{ url_for('logout') }}">
-  <button type="submit" class="btn btn-default navbar-btn navbar-right" value="lo" name="lo">Logout</button>
-</form>
+    <div class="form-group">
+      <label class="col-md-3 control-label"></label>
+      <div class="col-md-8">
+        <input type="button" class="btn btn-primary" value="Save Changes">
+        <span></span>
+        <input type="reset" class="btn btn-default" value="Cancel">
+      </div>
+    </div>
+  </form>
 </div>
+</div>
+</div>
+<hr>
+
 
 
 {% endblock %}

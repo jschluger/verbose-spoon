@@ -107,6 +107,9 @@ roddaJ -- 2016-12-12 14:04
 bayleS -- 2016-12-12 14:00
 - fixed mystocks page
 
+jessicaT -- 2016-12-12 14:00
+-fixed stock page, added messages to login page
+
 roddaJ -- 2016-12-12 15:31
 - Added buttons to shift between charts, tried unsuccessfully to get the resolution down to hourly or by minute.  There seems to be an issue either in the documentation or in their api.
 
@@ -116,3 +119,9 @@ bayleS -- 2016-12-12 21:00
 
 roddaJ -- 2016-12-12 21:52
 - Linked the charts with the stock page
+
+
+============== TUESDAY, DECEMBER 13th =====================
+
+jessicaT -- 2016-12-13 3:00
+-linked portfolio page from navbar, made profile page editable and look nice, logout in navbar

@@ -19,7 +19,12 @@
 	  <a class="navbar-brand" href="feed">Verbose Stock Exchange</a>
 	</div>
 
-      {% if "username" in session %}
+	{% if "username" in session %}
+
+<form method="POST" action="{{ url_for('logout') }}">
+  <button type="submit" class="btn btn-default navbar-btn navbar-right" value="lo" name="lo">Logout</button>
+</form>
+   <p class="navbar-text navbar-right">     </p>
 	<form class="navbar-form navbar-right" method="POST" action="{{ url_for('results') }}">
 	  <div class="form-group">
 	    <input type="text" class="form-control" placeholder="Ticker Symbol" name="search">
@@ -32,13 +37,16 @@
 	  <button type="submit" class="btn btn-default navbar-btn navbar-right">Feed</button>
 	</form>
 	<p class="navbar-text navbar-right">     </p>
-	<button type="button" class="btn btn-default navbar-btn navbar-right">Portfolio</button>
+<form method="POST" action="{{ url_for('myStocks') }}">
+ <p class="navbar-text navbar-right">     </p>
+	<button type="submit" class="btn btn-default navbar-btn navbar-right" value="port" name="port">Portfolio</button>
+</form>
 	<p class="navbar-text navbar-right">     </p>
 	<form method="POST" action="{{ url_for('profile') }}">
 	  <p class="navbar-text navbar-right">     </p>
 	  <button type="submit" class="btn btn-default navbar-btn navbar-right" value="prof" name="prof">Profile</button>
 	</form>
-      {% endif %}
+	{% endif %}
       </div>
     </nav>
     {% block body %}
