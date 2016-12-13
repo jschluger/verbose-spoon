@@ -33,16 +33,16 @@
 	</form>
 
 	<p class="navbar-text navbar-right">     </p>
-	<form method="POST" action="{{ url_for('feed') }}">
+	<form method="GET" action="{{ url_for('feed') }}">
 	  <button type="submit" class="btn btn-default navbar-btn navbar-right">Feed</button>
 	</form>
 	<p class="navbar-text navbar-right">     </p>
-<form method="POST" action="{{ url_for('myStocks') }}">
+<form method="GET" action="{{ url_for('myStocks') }}">
  <p class="navbar-text navbar-right">     </p>
 	<button type="submit" class="btn btn-default navbar-btn navbar-right" value="port" name="port">Portfolio</button>
 </form>
 	<p class="navbar-text navbar-right">     </p>
-	<form method="POST" action="{{ url_for('profile') }}">
+	<form method="GET" action="{{ url_for('profile') }}">
 	  <p class="navbar-text navbar-right">     </p>
 	  <button type="submit" class="btn btn-default navbar-btn navbar-right" value="prof" name="prof">Profile</button>
 	</form>
