@@ -15,7 +15,7 @@
   <h3>Edit personal info</h3>
 </div>
   <br><br><br><br>      
-  <form class="form-horizontal" role="form"   methods="GET" action="{{ url_for('edit_profile') }}">
+  <form class="form-horizontal" role="form"    method="POST" action="{{ url_for('edit_profile') }}">
     <div class="form-group">
         <div class="form-group">
       <label class="col-lg-3 control-label">Full Name:</label>
@@ -40,7 +40,9 @@
     <div class="form-group">
       <label class="col-md-3 control-label"></label>
       <div class="col-md-8">
-        <input type="submit" class="btn btn-primary" value="Save Changes">
+	<div class="input-group">
+            <button class="btn btn-default" type="submit">Save Changes</button>
+	    </div>
         <span></span>
         <input type="reset" class="btn btn-default" value="Clear Form">
 	<a href="{{ url_for('profile') }}" class="btn btn-default">Cancel Changes</a>

@@ -177,7 +177,7 @@ def profile():
         u = session["username"]
         profileStuff = info.get_user_info(u)
         if (request.method == "POST"):
-            return redirect(url_for('edit_profile'))
+            return render_template('edit_profile.html')
         if (request.method == "GET"):
             return render_template("profile.html", facts = profileStuff)
 
@@ -191,13 +191,14 @@ def edit_profile():
             accountManager.updateDob(u,dob)
             favStock = formDict["favStock"]
             accountManager.updateFav(u,favStock)
+            print ' doing the updating'
             fullName = formDict["fullName"]
             accountManager.updateFullName(u,fullName)        
             profileStuff = info.get_user_info(u)
-            return redirect(url_for('profile'),facts = profileStuff)
-        if (request.method == "GET"):
+            return redirect(url_for('profile',facts=profileStuff))
+        else:
             return render_template("edit_profile.html")
-
+    
 @app.route("/testerino")
 def root():
     u = urllib2.urlopen("https://api.nasa.gov/planetary/apod?api_key=z5OCLcXbxVpm5pJfALskk1aCWeBKRsNiFv8N1YYp")
