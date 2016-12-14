@@ -63,6 +63,4 @@ def latest(offset):
 
     return resp
 
-for item in lookup("abdsjfadf"):
-    print item
 

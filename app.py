@@ -2,8 +2,12 @@ from flask import Flask, render_template, request, session, redirect, url_for
 import hashlib
 import os
 import utils
-from  utils import accountManager, dbManager, api, info
+from  utils import accountManager, dbManager, api, info, ftapi
 import urllib2, json
+import sys
+
+reload(sys)
+sys.setdefaultencoding('utf8')
 
 app = Flask(__name__)
 f = open( "utils/key", 'r' )
@@ -83,7 +87,8 @@ def logout():
 @app.route("/feed")
 def feed():
     if 'username' in session:
-        return render_template("feed.html")
+        articles = ftapi.latest(0)
+        return render_template("feed.html", articles = articles)
     else:
         return redirect( url_for('loginOrRegister') )
 
