@@ -88,7 +88,8 @@ def logout():
 def feed():
     if 'username' in session:
         articles = ftapi.latest(0)
-        return render_template("feed.html", articles = articles)
+        funds = info.getFunds( session['username'] )
+        return render_template("feed.html", articles = articles, funds = funds)
     else:
         return redirect( url_for('loginOrRegister') )
 
@@ -96,31 +97,36 @@ def feed():
 @app.route("/stock/<stocksymbol>")
 @app.route("/stock/<stocksymbol>/<int:days>")
 def stock(stocksymbol=None, days = 14):
-    message = 0 #no error
+    if 'username' in session:
+        message = 0 #no error
 
-    # chart stuff
-    data_points = 0
-    data = 0
-    try:
-        data = api.get_chart(stocksymbol, number_of_days = days)
+        # chart stuff
+        data_points = 0
+        data = 0
+        try:
+            data = api.get_chart(stocksymbol, number_of_days = days)
 
-        data_points = []
+            data_points = []
         
-        for i in range(0, len(data['Positions'])):
-            data_points.append({})
-            data_points[i]['x'] = data['Dates'][i]
-            data_points[i]['y'] = data['Elements'][0]['DataSeries']['close']['values'][i]
-    except:
-        message = 1 # chart error
+            for i in range(0, len(data['Positions'])):
+                data_points.append({})
+                data_points[i]['x'] = data['Dates'][i]
+                data_points[i]['y'] = data['Elements'][0]['DataSeries']['close']['values'][i]
+        except:
+            message = 1 # chart error
+            
+        #non chart stuff
+        stockInfo = 0
+        try:
+            stockInfo = info.get_stock_info(stocksymbol, username=session['username'])
+        except:
+            message = 2 # info error
 
-    #non chart stuff
-    stockInfo = 0
-    try:
-        stockInfo = info.get_stock_info(stocksymbol, username=session['username'])
-    except:
-        message = 2 # info error
-        
-    return render_template("stock.html", data=stockInfo, data_points = data_points, d = data, symbol = stocksymbol, days = days, msg=message)
+        funds = info.getFunds( session['username'] )
+        return render_template("stock.html", data=stockInfo, data_points = data_points, d = data, symbol = stocksymbol, days = days, msg=message, funds = funds )
+    else:
+        return redirect("/")
+            
 
 
 @app.route("/myStocks", methods=["GET","POST"])
@@ -128,7 +134,8 @@ def myStocks():
     if 'username' in session:
         u = session["username"]
         tlist = dbManager.get_owned_stocks(u)
-        return render_template("my.html",info = tlist)
+        funds = info.getFunds( u )
+        return render_template("my.html",info = tlist, funds = funds)
     else:
         return redirect(url_for('loginOrRegister'))
     
@@ -175,22 +182,30 @@ def results():
         querry = formDict["search"]
         dictOfDicts = info.search_results(querry)
         return render_template("results.html", results = dictOfDicts, search = querry)
+    else:
+        return redirect( "/" )
 
+        
 @app.route("/profile", methods=["POST","GET"])
 def profile():
     if 'username' in session:
         u = session["username"]
         profileStuff = info.get_user_info(u)
+        funds = info.getFunds( u )
         if (request.method == "POST"):
-            return render_template('edit_profile.html')
+            return render_template('edit_profile.html', funds = funds)
         if (request.method == "GET"):
-            return render_template("profile.html", facts = profileStuff)
+            return render_template("profile.html", facts = profileStuff, funds = funds)
+    else:
+        return redirect("/")
 
+    
 @app.route("/edit_profile", methods=["POST","GET"])
 def edit_profile():
     if 'username' in session:
         if (request.method == "POST"):
             u = session["username"]
+            funds = info.getFunds( u )
             formDict = request.form
             dob = formDict["dob"]
             accountManager.updateDob(u,dob)
@@ -200,9 +215,11 @@ def edit_profile():
             fullName = formDict["fullName"]
             accountManager.updateFullName(u,fullName)        
             profileStuff = info.get_user_info(u)
-            return redirect(url_for('profile',facts=profileStuff))
+            return redirect(url_for('profile',facts=profileStuff), funds = funds)
         else:
-            return render_template("edit_profile.html")
+            return render_template("edit_profile.html", funds = funds)
+    else:
+        return redirect("/")
     
 @app.route("/testerino")
 def root():

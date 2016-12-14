@@ -3,10 +3,21 @@ import api
 import sqlite3
 import locale
 
-'''locale.setlocale(locale.LC_ALL, 'en_US')'''
 
-def displayPrice( x ):
-    return locale.format("%f", 1255000, True)
+def getFunds( username ):
+    locale.setlocale(locale.LC_ALL, 'en_US')
+    f = "database.db"
+    db = sqlite3.connect(f)
+    c = db.cursor()
+
+    q = 'SELECT funds FROM users WHERE username == "%s"'%(username)
+    c.execute(q)
+    funds = c.fetchone()[0]
+    
+    db.commit()
+    db.close()
+
+    return locale.format("%d", funds, True)
 
 def get_stock_info(ticker, **kwargs):
     info = api.get_quote_dict(ticker)
