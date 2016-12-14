@@ -133,12 +133,16 @@ def buy():
         u = session["username"]
         formDict = request.form
         sn = formDict["stockName"]
-        s = int(formDict["shares"])
+        s = formDict["shares"]
         p = float(formDict["price"])
-        message = dbManager.buyStock(sn,s,p,u)
-        if (message == "you don't got enuf money, dude"):
-            return redirect(url_for('stock',note=message, msg=True, stocksymbol=formDict["stockSymbol"], days=formDict["days"]))
-            
+        status = dbManager.buyStock(sn,s,p,u)
+        if (status == 1):
+            note = "You do not have sufficent funds to complete this transaction"
+            return redirect(url_for('stock',note=note, msg=True, stocksymbol=formDict["stockSymbol"], days=formDict["days"]))
+        if (status == 0):
+            note = "Please input a positive integer value for number of shares"
+            return redirect(url_for('stock',note=note, msg=True, stocksymbol=formDict["stockSymbol"], days=formDict["days"]))
+        
         return redirect(url_for('myStocks'))
         
 @app.route("/sell", methods=["POST"])
@@ -147,11 +151,15 @@ def sell():
         u = session["username"]
         formDict = request.form
         sn = formDict["stockName"]
-        s = int(formDict["shares"])
+        s = formDict["shares"]
         p = float(formDict["price"])
-        message = dbManager.sellStock(sn,s,p,u)
-        if (message == "you do not have enough shares of this stock to make this transaction"):
-            return redirect(url_for('stock',note=message, msg=True, stocksymbol=formDict["stockSymbol"], days=formDict["days"]))
+        status = dbManager.sellStock(sn,s,p,u)
+        if (status == 1):
+            note = "You do not have sufficent shares to make this transaction"
+            return redirect(url_for('stock',note=note, msg=True, stocksymbol=formDict["stockSymbol"], days=formDict["days"]))
+        if (status == 0):
+            note = "Please input a positive integer value for number of shares"
+            return redirect(url_for('stock',note=note, msg=True, stocksymbol=formDict["stockSymbol"], days=formDict["days"]))
             
         return redirect(url_for('myStocks'))
 

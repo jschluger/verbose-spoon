@@ -1,10 +1,25 @@
 import sqlite3   #enable control of an sqlite database
+def toPosInt( x ):
+    try:
+        x = int(x)
+    except:
+        return -1 # bad
 
+    if x < 0:
+        return -1 # bad
+    else:
+        return x
+   
+    
 def buyStock(stockName, shares, price, username):
     f = "database.db"
     db = sqlite3.connect(f) #open if f exists, otherwise create
     c = db.cursor()    #facilitate db ops
 
+    shares = toPosInt( shares )
+    if shares < 0:
+        return 0 # invalid value for shares
+    
     if (enufMoney(username,shares,price)):
         theMoney = """SELECT funds FROM users WHERE username == "%s" """ % (username)
         c.execute(theMoney)
@@ -29,19 +44,23 @@ def buyStock(stockName, shares, price, username):
     else:
         db.commit()
         db.close()
-        return "you don't got enuf money, dude"
+        return 1 # not enough money
     
     db.commit()
     db.close()
-    return "transaction complete"
+    return 2 #success
     
 def sellStock(stockName, shares, price, username):
     f = "database.db"
     db = sqlite3.connect(f) #open if f exists, otherwise create
     c = db.cursor()    #facilitate db ops
 
-    if (canYouEvenSell(username, stockName, shares)):
+    shares = toPosInt(shares)
+    if shares < 0:
+        return 0
 
+    if (canYouEvenSell(username, stockName, shares)):
+        
         theMoney = """SELECT funds FROM users WHERE username == "%s" """ % (username)
         c.execute(theMoney)
         money = c.fetchone()[0]
@@ -62,10 +81,11 @@ def sellStock(stockName, shares, price, username):
     else:
         db.commit()
         db.close()
-        return "you do not have enough shares of this stock to make this transaction"        
+        return 1
+
     db.commit()
     db.close()
-    return "sold!"
+    return 2
     
 def enufMoney(username,shares,price):
     f = "database.db"
