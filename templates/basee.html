@@ -21,13 +21,13 @@
 
 	{% if "username" in session %}
 
-<form method="POST" action="{{ url_for('logout') }}">
-  <button type="submit" class="btn btn-default navbar-btn navbar-right" value="lo" name="lo">Logout</button>
-</form>
-   <p class="navbar-text navbar-right">     </p>
+	<form method="POST" action="{{ url_for('logout') }}">
+	  <button type="submit" class="btn btn-default navbar-btn navbar-right" value="lo" name="lo">Logout</button>
+	</form>
+	<p class="navbar-text navbar-right">     </p>
 	<form class="navbar-form navbar-right" method="POST" action="{{ url_for('results') }}">
 	  <div class="form-group">
-	    <input type="text" class="form-control" placeholder="Ticker Symbol" name="search">
+	    <input type="text" class="form-control" placeholder="Search for a Stock" name="search">
 	  </div>
 	  <button type="submit" class="btn btn-default" name="srch" value="srch"><span class="glyphicon glyphicon-search" aria-hidden="true"></span> </button>
 	</form>
@@ -37,14 +37,14 @@
 	  <button type="submit" class="btn btn-default navbar-btn navbar-right">Feed</button>
 	</form>
 	<p class="navbar-text navbar-right">     </p>
-<form method="GET" action="{{ url_for('myStocks') }}">
- <p class="navbar-text navbar-right">     </p>
-	<button type="submit" class="btn btn-default navbar-btn navbar-right" value="port" name="port">Portfolio</button>
-</form>
+	<form method="GET" action="{{ url_for('myStocks') }}">
+	  <p class="navbar-text navbar-right">     </p>
+	  <button type="submit" class="btn btn-default navbar-btn navbar-right">Portfolio</button>
+	</form>
 	<p class="navbar-text navbar-right">     </p>
 	<form method="GET" action="{{ url_for('profile') }}">
 	  <p class="navbar-text navbar-right">     </p>
-	  <button type="submit" class="btn btn-default navbar-btn navbar-right" value="prof" name="prof">Profile</button>
+	  <button type="submit" class="btn btn-default navbar-btn navbar-right">Profile</button>
 	</form>
 	{% endif %}
       </div>

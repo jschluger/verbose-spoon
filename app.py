@@ -78,27 +78,14 @@ def authOrCreate():
 def logout():
     if "username" in session:
         session.pop('username')
-        return render_template("loginOrReg.html",status="logged out") 
-    else:
-        return redirect(url_for('loginOrRegister'))
-
-@app.route("/testerino")
-def root():
-    u = urllib2.urlopen("https://api.nasa.gov/planetary/apod?api_key=z5OCLcXbxVpm5pJfALskk1aCWeBKRsNiFv8N1YYp")
-    response = u.read()
-    data = json.loads( response )
-    return render_template("index.html", pic = data['url'] )
-
-@app.route("/testing")
-def test():
-    u = urllib2.urlopen("http://api.ft.com/site/v1/pages?apiKey=rdf6mjwhqtnz7a5wvm45t3cs")
-    response = u.read()
-    data = json.loads( response )
-    return render_template("test.html", info = data )
+    return redirect(url_for('loginOrRegister'))
 
 @app.route("/feed")
 def feed():
-    return "Works"
+    if 'username' in session:
+        return render_template("feed.html")
+    else:
+        return redirect( url_for('loginOrRegister') )
 
     
 @app.route("/stock/<stocksymbol>")
@@ -186,8 +173,24 @@ def edit_profile():
             return redirect(url_for('profile'),facts = profileStuff)
         if (request.method == "GET"):
             return render_template("edit_profile.html")
-    
+
+@app.route("/testerino")
+def root():
+    u = urllib2.urlopen("https://api.nasa.gov/planetary/apod?api_key=z5OCLcXbxVpm5pJfALskk1aCWeBKRsNiFv8N1YYp")
+    response = u.read()
+    data = json.loads( response )
+    return render_template("index.html", pic = data['url'] )
+
+@app.route("/testing")
+def test():
+    u = urllib2.urlopen("http://api.ft.com/site/v1/pages?apiKey=rdf6mjwhqtnz7a5wvm45t3cs")
+    response = u.read()
+    data = json.loads( response )
+    return render_template("test.html", info = data )
+
     
 if __name__ == "__main__":
     app.debug = True
     app.run()
+
+    
