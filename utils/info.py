@@ -1,6 +1,12 @@
 import dbManager
 import api
 import sqlite3
+import locale
+
+locale.setlocale(locale.LC_ALL, 'en_US')
+
+def displayPrice( x ):
+    return locale.format("%f", 1255000, True)
 
 def get_stock_info(ticker, **kwargs):
     info = api.get_quote_dict(ticker)
