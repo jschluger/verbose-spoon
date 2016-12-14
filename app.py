@@ -165,22 +165,28 @@ def profile():
     if 'username' in session:
         u = session["username"]
         profileStuff = info.get_user_info(u)
-        return render_template("profile.html",facts = profileStuff)
+        if (request.method == "POST"):
+            return redirect(url_for('edit_profile'))
+        if (request.method == "GET"):
+            return render_template("profile.html", facts = profileStuff)
 
 @app.route("/edit_profile", methods=["POST","GET"])
 def edit_profile():
     if 'username' in session:
-        u = session["username"]
-        formDict = request.form
-        dob = formDict["dob"]
-        accountManager.updateDob(u,dob)
-        favStock = formDict["favStock"]
-        accountManager.updateFav(u,favStock)
-        fullName = formDict["fullName"]
-        accountManager.updateFullName(u,fullName)        
-        profileStuff = info.get_user_info(u)
-        return redirect(url_for('profile'))
-
+        if (request.method == "POST"):
+            u = session["username"]
+            formDict = request.form
+            dob = formDict["dob"]
+            accountManager.updateDob(u,dob)
+            favStock = formDict["favStock"]
+            accountManager.updateFav(u,favStock)
+            fullName = formDict["fullName"]
+            accountManager.updateFullName(u,fullName)        
+            profileStuff = info.get_user_info(u)
+            return redirect(url_for('profile'),facts = profileStuff)
+        if (request.method == "GET"):
+            return render_template("edit_profile.html")
+    
     
 if __name__ == "__main__":
     app.debug = True
