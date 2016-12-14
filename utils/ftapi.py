@@ -2,7 +2,7 @@ import urllib2, json
 
 
 f = open( "utils/ftkey", 'r' )
-KEY = f.read();
+key = f.read();
 f.close
 
 

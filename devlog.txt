@@ -121,10 +121,18 @@ roddaJ -- 2016-12-12 21:52
 - Linked the charts with the stock page
 
 
-============== TUESDAY, DECEMBER 13th =====================
+============== TUESDAY, DECEMBER 13th =================
 
 jessicaT -- 2016-12-13 3:00
 -linked portfolio page from navbar, made profile page editable and look nice, logout in navbar
 
 bayleS -- 2016-12-13 ALL DAY
 - made, fixed, and linked edit_profile
+
+jackS -- 2016-12-13 23:59
+- generaly cleaned up code
+- added internal error handeling to /stock, rather than crashing the app
+- made the user's funds show up on every page, formatted nicely
+- corrected all links and redirection that was leading the user to bad places (ie got rid of development stage dummy links / paths) 
+
+============== WEDNESDAY, DECEMBER 14th =================
