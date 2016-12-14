@@ -1,5 +1,11 @@
 import urllib2, json
 
+
+f = open( "utils/ftkey", 'r' )
+KEY = f.read();
+f.close
+
+
 def lookup(keyword):
     search = json.dumps({
         "queryString": "%s" % (keyword,) ,
@@ -12,7 +18,7 @@ def lookup(keyword):
         }
     })
 
-    request = urllib2.Request("http://api.ft.com/content/search/v1?apiKey=rdf6mjwhqtnz7a5wvm45t3cs", data = search, headers={"Content-Type":"application/json"})
+    request = urllib2.Request("http://api.ft.com/content/search/v1?apiKey=" + key, data = search, headers={"Content-Type":"application/json"})
     r = urllib2.urlopen(request).read()
     content = json.loads(r)
 
@@ -45,7 +51,7 @@ def latest(offset):
     })
     
    
-    request = urllib2.Request("http://api.ft.com/content/search/v1?apiKey=rdf6mjwhqtnz7a5wvm45t3cs", data = search, headers={"Content-Type":"application/json"})
+    request = urllib2.Request("http://api.ft.com/content/search/v1?apiKey=" + key, data = search, headers={"Content-Type":"application/json"})
     try:
         r = urllib2.urlopen(request).read()
     except:

@@ -181,7 +181,8 @@ def results():
         formDict = request.form
         querry = formDict["search"]
         dictOfDicts = info.search_results(querry)
-        return render_template("results.html", results = dictOfDicts, search = querry)
+        funds = info.getFunds( session['username'] )
+        return render_template("results.html", results = dictOfDicts, search = querry, funds = funds)
     else:
         return redirect( "/" )
 
