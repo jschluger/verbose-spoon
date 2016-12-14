@@ -96,7 +96,8 @@ def feed():
     
 @app.route("/stock/<stocksymbol>")
 @app.route("/stock/<stocksymbol>/<int:days>")
-def stock(stocksymbol=None, days = 14):
+@app.route("/stock/<stocksymbol>/<int:days>/<note>")
+def stock(stocksymbol=None, days = 14, note=""):
     if 'username' in session:
         message = 0 #no error
 
@@ -121,9 +122,14 @@ def stock(stocksymbol=None, days = 14):
             stockInfo = info.get_stock_info(stocksymbol, username=session['username'])
         except:
             message = 2 # info error
+            
+        
 
         funds = info.getFunds( session['username'] )
-        return render_template("stock.html", data=stockInfo, data_points = data_points, d = data, symbol = stocksymbol, days = days, msg=message, funds = funds )
+
+        print "MSDFSDAGFADSFSDA"
+        print note
+        return render_template("stock.html", data=stockInfo, data_points = data_points, d = data, symbol = stocksymbol, days = days, msg=message, funds = funds, note=note )
     else:
         return redirect("/")
             
@@ -150,10 +156,10 @@ def buy():
         status = dbManager.buyStock(sn,s,p,u)
         if (status == 1):
             note = "You do not have sufficent funds to complete this transaction"
-            return redirect(url_for('stock',note=note, msg=True, stocksymbol=formDict["stockSymbol"], days=formDict["days"]))
+            return redirect(url_for('stock',note=note, stocksymbol=formDict["stockSymbol"], days=formDict["days"]))
         if (status == 0):
             note = "Please input a positive integer value for number of shares"
-            return redirect(url_for('stock',note=note, msg=True, stocksymbol=formDict["stockSymbol"], days=formDict["days"]))
+            return redirect(url_for('stock',note=note, stocksymbol=formDict["stockSymbol"], days=formDict["days"]))
         
         return redirect(url_for('myStocks'))
         
@@ -167,11 +173,12 @@ def sell():
         p = float(formDict["price"])
         status = dbManager.sellStock(sn,s,p,u)
         if (status == 1):
+            print "GFDSGDSGDFSG"
             note = "You do not have sufficent shares to make this transaction"
-            return redirect(url_for('stock',note=note, msg=True, stocksymbol=formDict["stockSymbol"], days=formDict["days"]))
+            return redirect(url_for('stock',note=note, stocksymbol=formDict["stockSymbol"], days=formDict["days"]))
         if (status == 0):
             note = "Please input a positive integer value for number of shares"
-            return redirect(url_for('stock',note=note, msg=True, stocksymbol=formDict["stockSymbol"], days=formDict["days"]))
+            return redirect(url_for('stock',note=note, stocksymbol=formDict["stockSymbol"], days=formDict["days"]))
             
         return redirect(url_for('myStocks'))
 
@@ -239,5 +246,4 @@ def test():
     
 if __name__ == "__main__":
     app.debug = True
-    app.run()
-    
+    app.run(host=os.getenv('IP', '0.0.0.0'),port=int(os.getenv('PORT', 8080)))

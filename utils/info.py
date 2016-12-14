@@ -5,7 +5,7 @@ import locale
 
 
 def getFunds( username ):
-    locale.setlocale(locale.LC_ALL, 'en_US')
+    #locale.setlocale(locale.LC_ALL, 'en_US')
     f = "database.db"
     db = sqlite3.connect(f)
     c = db.cursor()
