@@ -91,16 +91,32 @@ def feed():
 @app.route("/stock/<stocksymbol>")
 @app.route("/stock/<stocksymbol>/<int:days>")
 def stock(stocksymbol=None, days = 14):
-    data = api.get_chart(stocksymbol, number_of_days = days)
+    message = 0 #no error
 
-    data_points = []
+    # chart stuff
+    data_points = 0
+    data = 0
+    try:
+        data = api.get_chart(stocksymbol, number_of_days = days)
 
-    for i in range(0, len(data['Positions'])):
-        data_points.append({})
-        data_points[i]['x'] = data['Dates'][i]
-        data_points[i]['y'] = data['Elements'][0]['DataSeries']['close']['values'][i]
+        data_points = []
+        
+        for i in range(0, len(data['Positions'])):
+            data_points.append({})
+            data_points[i]['x'] = data['Dates'][i]
+            data_points[i]['y'] = data['Elements'][0]['DataSeries']['close']['values'][i]
+    except:
+        message = 1 # chart error
 
-    return render_template("stock.html", data=info.get_stock_info(stocksymbol, username=session['username']), data_points = data_points, d = data, symbol = stocksymbol, days = days, msg=False)
+    #non chart stuff
+    stockInfo = 0
+    try:
+        stockInfo = info.get_stock_info(stocksymbol, username=session['username'])
+    except:
+        message = 2 # info error
+        
+    return render_template("stock.html", data=stockInfo, data_points = data_points, d = data, symbol = stocksymbol, days = days, msg=message)
+
 
 @app.route("/myStocks", methods=["GET","POST"])
 def myStocks():
@@ -117,12 +133,16 @@ def buy():
         u = session["username"]
         formDict = request.form
         sn = formDict["stockName"]
-        s = int(formDict["shares"])
+        s = formDict["shares"]
         p = float(formDict["price"])
-        message = dbManager.buyStock(sn,s,p,u)
-        if (message == "you don't got enuf money, dude"):
-            return redirect(url_for('stock',note=message, msg=True, stocksymbol=formDict["stockSymbol"], days=formDict["days"]))
-            
+        status = dbManager.buyStock(sn,s,p,u)
+        if (status == 1):
+            note = "You do not have sufficent funds to complete this transaction"
+            return redirect(url_for('stock',note=note, msg=True, stocksymbol=formDict["stockSymbol"], days=formDict["days"]))
+        if (status == 0):
+            note = "Please input a positive integer value for number of shares"
+            return redirect(url_for('stock',note=note, msg=True, stocksymbol=formDict["stockSymbol"], days=formDict["days"]))
+        
         return redirect(url_for('myStocks'))
         
 @app.route("/sell", methods=["POST"])
@@ -131,11 +151,15 @@ def sell():
         u = session["username"]
         formDict = request.form
         sn = formDict["stockName"]
-        s = int(formDict["shares"])
+        s = formDict["shares"]
         p = float(formDict["price"])
-        message = dbManager.sellStock(sn,s,p,u)
-        if (message == "you do not have enough shares of this stock to make this transaction"):
-            return redirect(url_for('stock',note=message, msg=True, stocksymbol=formDict["stockSymbol"], days=formDict["days"]))
+        status = dbManager.sellStock(sn,s,p,u)
+        if (status == 1):
+            note = "You do not have sufficent shares to make this transaction"
+            return redirect(url_for('stock',note=note, msg=True, stocksymbol=formDict["stockSymbol"], days=formDict["days"]))
+        if (status == 0):
+            note = "Please input a positive integer value for number of shares"
+            return redirect(url_for('stock',note=note, msg=True, stocksymbol=formDict["stockSymbol"], days=formDict["days"]))
             
         return redirect(url_for('myStocks'))
 
@@ -153,7 +177,7 @@ def profile():
         u = session["username"]
         profileStuff = info.get_user_info(u)
         if (request.method == "POST"):
-            return redirect(url_for('edit_profile'))
+            return render_template('edit_profile.html')
         if (request.method == "GET"):
             return render_template("profile.html", facts = profileStuff)
 
@@ -167,13 +191,14 @@ def edit_profile():
             accountManager.updateDob(u,dob)
             favStock = formDict["favStock"]
             accountManager.updateFav(u,favStock)
+            print ' doing the updating'
             fullName = formDict["fullName"]
             accountManager.updateFullName(u,fullName)        
             profileStuff = info.get_user_info(u)
-            return redirect(url_for('profile'),facts = profileStuff)
-        if (request.method == "GET"):
+            return redirect(url_for('profile',facts=profileStuff))
+        else:
             return render_template("edit_profile.html")
-
+    
 @app.route("/testerino")
 def root():
     u = urllib2.urlopen("https://api.nasa.gov/planetary/apod?api_key=z5OCLcXbxVpm5pJfALskk1aCWeBKRsNiFv8N1YYp")
@@ -192,5 +217,4 @@ def test():
 if __name__ == "__main__":
     app.debug = True
     app.run()
-
     

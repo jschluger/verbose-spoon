@@ -80,7 +80,7 @@ def register(user,password,pwd):    #user-username, password-password, pwd-retyp
             userId = 0
 
         passHash = sha1(password).hexdigest()#hash it
-        insertUser = 'INSERT INTO users VALUES ("%s","%s",%d, 100000," ",0," ");' % (user,passHash,userId) #sqlite code for inserting new user
+        insertUser = 'INSERT INTO users VALUES ("%s","%s","%s", 100000," ",0," ");' % (user,passHash,userId) #sqlite code for inserting new user
 
         c.execute(insertUser)
 
@@ -128,7 +128,7 @@ def updateDob(username,birth):
         c.execute(p)
         oldDob = c.fetchone()[0]
 
-    p = 'UPDATE users SET dob = %d WHERE username == "%s"'%(birth, username)
+    p = 'UPDATE users SET dob = "%s" WHERE username == "%s"'%(birth, username)
     c.execute(p)
 
     db.commit()
