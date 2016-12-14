@@ -125,3 +125,6 @@ roddaJ -- 2016-12-12 21:52
 
 jessicaT -- 2016-12-13 3:00
 -linked portfolio page from navbar, made profile page editable and look nice, logout in navbar
+
+bayleS -- 2016-12-13 ALL DAY
+- made, fixed, and linked edit_profile
