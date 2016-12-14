@@ -136,3 +136,6 @@ jackS -- 2016-12-13 23:59
 - corrected all links and redirection that was leading the user to bad places (ie got rid of development stage dummy links / paths) 
 
 ============== WEDNESDAY, DECEMBER 14th =================
+
+jessicaT --2016-12-14 2:00
+-made the messages display properly for buy/sell 
