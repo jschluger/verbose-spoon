@@ -1,19 +1,20 @@
-import requests
-import json
+import urllib2, json
 
 def lookup(keyword):
     search = json.dumps({
         "queryString": "%s" % (keyword,) ,
         "resultContext" : {
-            "maxResults" : "1",
+            "maxResults" : "10",
             "offset" : "0",
             "aspects" : ["title","summary","location"],
             "sortOrder" : "DESC",
             "sortField" : "initialPublishDateTime"
         }
     })
-    r = requests.post("http://api.ft.com/content/search/v1?apiKey=rdf6mjwhqtnz7a5wvm45t3cs", headers={"Content-Type":"application/json"}, data = search)
-    content = json.loads(r.text)
+
+    request = urllib2.Request("http://api.ft.com/content/search/v1?apiKey=rdf6mjwhqtnz7a5wvm45t3cs", data = search, headers={"Content-Type":"application/json"})
+    r = urllib2.urlopen(request).read()
+    content = json.loads(r)
 
     if 'results' not in content["results"][0]:
         return "No articles found"
@@ -43,11 +44,17 @@ def latest(offset):
         }
     })
     
-    r = requests.post("http://api.ft.com/content/search/v1?apiKey=rdf6mjwhqtnz7a5wvm45t3cs", headers={"Content-Type":"application/json"}, data = search)
-    if r.text.encode("UTF-8") == "Unprocessable Entity":
-        return "Nothing here"
+   
+    request = urllib2.Request("http://api.ft.com/content/search/v1?apiKey=rdf6mjwhqtnz7a5wvm45t3cs", data = search, headers={"Content-Type":"application/json"})
+    try:
+        r = urllib2.urlopen(request).read()
+    except:
+        return "No articles here"
     
-    content = json.loads(r.text)
+    content = json.loads(r)
+    #print content
+    #if r.text.encode("UTF-8") == "Unprocessable Entity":
+    #    return "Nothing here"
 
     resp = []
     print content
@@ -62,5 +69,3 @@ def latest(offset):
         resp.append(info)
 
     return resp
-
-
