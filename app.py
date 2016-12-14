@@ -211,9 +211,9 @@ def profile():
 @app.route("/edit_profile", methods=["POST","GET"])
 def edit_profile():
     if 'username' in session:
+        u = session["username"]
+        funds = info.getFunds( u )
         if (request.method == "POST"):
-            u = session["username"]
-            funds = info.getFunds( u )
             formDict = request.form
             dob = formDict["dob"]
             accountManager.updateDob(u,dob)
@@ -223,7 +223,7 @@ def edit_profile():
             fullName = formDict["fullName"]
             accountManager.updateFullName(u,fullName)        
             profileStuff = info.get_user_info(u)
-            return redirect(url_for('profile',facts=profileStuff), funds = funds)
+            return redirect(url_for('profile',facts=profileStuff, funds = funds))
         else:
             return render_template("edit_profile.html", funds = funds)
     else:
@@ -246,4 +246,5 @@ def test():
     
 if __name__ == "__main__":
     app.debug = True
-    app.run(host=os.getenv('IP', '0.0.0.0'),port=int(os.getenv('PORT', 8080)))
+    #app.run(host=os.getenv('IP', '0.0.0.0'),port=int(os.getenv('PORT', 8080)))
+    app.run()
