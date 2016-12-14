@@ -91,16 +91,32 @@ def feed():
 @app.route("/stock/<stocksymbol>")
 @app.route("/stock/<stocksymbol>/<int:days>")
 def stock(stocksymbol=None, days = 14):
-    data = api.get_chart(stocksymbol, number_of_days = days)
+    message = 0 #no error
 
-    data_points = []
+    # chart stuff
+    data_points = 0
+    data = 0
+    try:
+        data = api.get_chart(stocksymbol, number_of_days = days)
 
-    for i in range(0, len(data['Positions'])):
-        data_points.append({})
-        data_points[i]['x'] = data['Dates'][i]
-        data_points[i]['y'] = data['Elements'][0]['DataSeries']['close']['values'][i]
+        data_points = []
+        
+        for i in range(0, len(data['Positions'])):
+            data_points.append({})
+            data_points[i]['x'] = data['Dates'][i]
+            data_points[i]['y'] = data['Elements'][0]['DataSeries']['close']['values'][i]
+    except:
+        message = 1 # chart error
 
-    return render_template("stock.html", data=info.get_stock_info(stocksymbol, username=session['username']), data_points = data_points, d = data, symbol = stocksymbol, days = days, msg=False)
+    #non chart stuff
+    stockInfo = 0
+    try:
+        stockInfo = info.get_stock_info(stocksymbol, username=session['username'])
+    except:
+        message = 2 # info error
+        
+    return render_template("stock.html", data=stockInfo, data_points = data_points, d = data, symbol = stocksymbol, days = days, msg=message)
+
 
 @app.route("/myStocks", methods=["GET","POST"])
 def myStocks():
