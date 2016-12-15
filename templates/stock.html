@@ -119,29 +119,6 @@
 
 {% endif %}
 
-{% if articles[0] is defined %}
-
-{% for article in articles %}
-<div class="col-lg-6">
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      <h3 class="panel-title"><a href={{ article[2] }} target="_blank"> {{ article[0] }} </a></h3>
-    </div>
-    <div class="panel-body">
-      {{ article[1] }}
-    </div>
-  </div>
-</div>
-{% endfor %}
-
-{% else %}
-No articles found
-{% endif %}
-
-
-
-
-
 
 {% if msg == 0 %}
 <div class="page-header">
@@ -227,5 +204,28 @@ No articles found
 {% endif %}
 
 
+<br><br>
+<center>
+  <h3><b>Articles Related to {{ data[1] }}</b></h3>
+</center>
+
+{% if articles[0] is defined %}
+
+{% for article in articles %}
+<div class="col-lg-6">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title"><a href={{ article[2] }} target="_blank"> {{ article[0] }} </a></h3>
+    </div>
+    <div class="panel-body">
+      {{ article[1] }}
+    </div>
+  </div>
+</div>
+{% endfor %}
+
+{% else %}
+<center>No articles found</center>
+{% endif %}
 
 {% endblock %}
