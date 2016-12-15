@@ -59,6 +59,12 @@ def get_user_info(username):
     return resp
 
 def search_results(search):
+    badChars = " <>/\{}[]();"
+    if len(search) == 0:
+        return -1
+    for c in badChars:
+        if c in search:
+            return -1
     dictOfDicts = api.lookup(search)
     result = [[0 for x in range(len(dictOfDicts[0]))]for y in range(len(dictOfDicts))]
     for i in range(len(dictOfDicts)):

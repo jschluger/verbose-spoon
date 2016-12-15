@@ -9,6 +9,7 @@
 <center><h3><b> Showing Search Results For "{{search}}"</b></h3></center><br><br><br>
 
 
+{% if flag == 0 %}
 {% for k in results %}
 
 <div class="page-header">
@@ -23,7 +24,23 @@
 
 {% endfor %}
 
+{% endif %}
 
+{% if flag == 1 %}
+<div class="alert alert-danger alert-dismissible" role="alert">
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+  <strong>Something went wrong when we connected to an API. Please reload this page in 1 minute.</strong> {{ note }}
+</div>
+
+{% endif %}
+
+{% if flag == 2 %}
+<div class="alert alert-danger alert-dismissible" role="alert">
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+  <strong>Please input a nicer search string (no spaces or other evil characters).</strong> {{ note }}
+</div>
+
+{% endif %}
 
 
 
