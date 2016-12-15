@@ -66,3 +66,23 @@ def search_results(search):
         result[i][1] = dictOfDicts[i]['Symbol']
     return result
         
+
+## ticker, company name, price, time of price, nummber of stocks
+def get_user_stocks(username):
+    f = "database.db"
+    db = sqlite3.connect(f)
+    c = db.cursor()
+
+    q = "SELECT stockName FROM stocks WHERE username == ?"
+    c.execute(q, (username,))
+    result = c.fetchall()
+    db.commit()
+    db.close()
+
+    resp = []
+    for item in result:
+        resp.append(get_stock_info(item[0], username=username))
+
+    return resp
+
+
