@@ -63,7 +63,6 @@ def latest(offset):
     #    return "Nothing here"
 
     resp = []
-    print content
     for item in content["results"][0]["results"]:
         title =  item["title"]["title"].encode("utf-8")
         if 'excerpt' in item["summary"]:

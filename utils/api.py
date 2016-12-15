@@ -67,6 +67,4 @@ def lookup(search_term):
     return data
     
     
-    
-d = get_quote_dict("CHK")
-print d['Name']
+
