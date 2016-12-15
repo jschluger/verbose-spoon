@@ -5,7 +5,6 @@ import locale
 
 
 def getFunds( username ):
-    locale.setlocale(locale.LC_ALL, 'en_US')
     f = "database.db"
     db = sqlite3.connect(f)
     c = db.cursor()
@@ -17,7 +16,11 @@ def getFunds( username ):
     db.commit()
     db.close()
 
-    return locale.format("%d", funds, True)
+    try:
+        locale.setlocale(locale.LC_ALL, 'en_US')
+        return locale.format("%d", funds, True)
+    except:
+        return funds
 
 def get_stock_info(ticker, **kwargs):
     info = api.get_quote_dict(ticker)
