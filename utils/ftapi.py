@@ -10,7 +10,7 @@ def lookup(keyword):
     search = json.dumps({
         "queryString": "%s" % (keyword,) ,
         "resultContext" : {
-            "maxResults" : "10",
+            "maxResults" : "8",
             "offset" : "0",
             "aspects" : ["title","summary","location"],
             "sortOrder" : "DESC",
