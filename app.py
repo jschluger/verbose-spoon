@@ -129,6 +129,7 @@ def stock(stocksymbol=None, days = 14, note=""):
 
         print "MSDFSDAGFADSFSDA"
         print note
+
         articles = ftapi.lookup(stockInfo[1])
         return render_template("stock.html", data=stockInfo, data_points = data_points, d = data, symbol = stocksymbol, days = days, msg=message, funds = funds, note=note, articles=articles )
     else:

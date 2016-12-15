@@ -19,7 +19,7 @@
 
 <div class="alert alert-danger alert-dismissible" role="alert">
   <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-  <strong>Something went wrong when we were finding info about this stock.</strong> {{ note }}
+  <strong>Something went wrong when we were finding info about this stock.  Try reloading this page in one minute.</strong> {{ note }}
 </div>
 
 {% else %}
@@ -92,7 +92,7 @@
 {% if msg == 1 %}
 <div class="alert alert-danger alert-dismissible" role="alert">
   <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-  <strong>Something went wrong when we were generating your charts.</strong> {{ note }}
+  <strong>Something went wrong when we were generating your charts. Try reloading this page in one minute.</strong> {{ note }}
 </div>
 
 {% else %}
