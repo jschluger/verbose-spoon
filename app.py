@@ -186,11 +186,21 @@ def sell():
 @app.route("/results", methods=["POST"])
 def results():
     if 'username' in session:
-        formDict = request.form
-        querry = formDict["search"]
-        dictOfDicts = info.search_results(querry)
+        flag = 0 # no error
+
+        querry = 0
+        dictOfDicts = 0
+        try:
+            formDict = request.form
+            querry = formDict["search"]
+            dictOfDicts = info.search_results(querry)
+            if dictOfDicts == -1:
+                flag = 2
+        except:
+            flag = 1 # error
         funds = info.getFunds( session['username'] )
-        return render_template("results.html", results = dictOfDicts, search = querry, funds = funds)
+        
+        return render_template("results.html", results = dictOfDicts, search = querry, funds = funds, flag = flag)
     else:
         return redirect( "/" )
 
