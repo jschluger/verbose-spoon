@@ -137,5 +137,10 @@ jackS -- 2016-12-13 23:59
 
 ============== WEDNESDAY, DECEMBER 14th =================
 
-jessicaT --2016-12-14 2:00
+jessicaT -- 2016-12-14 2:00
 -made the messages display properly for buy/sell 
+
+jackS -- 2016-12-14 22:54
+- filtered user input in search
+- pm'ed
+- added native error messages to /results, instead of crashing the app
