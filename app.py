@@ -139,7 +139,7 @@ def stock(stocksymbol=None, days = 14, note=""):
 def myStocks():
     if 'username' in session:
         u = session["username"]
-        tlist = dbManager.get_owned_stocks(u)
+        tlist = info.get_user_stocks(u)
         funds = info.getFunds( u )
         return render_template("my.html",info = tlist, funds = funds)
     else:
@@ -246,5 +246,4 @@ def test():
     
 if __name__ == "__main__":
     app.debug = True
-    #app.run(host=os.getenv('IP', '0.0.0.0'),port=int(os.getenv('PORT', 8080)))
     app.run()
